@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :gist, Gist.Repo,
-  username: "",
-  password: "",
+  username: "elixir",
+  password: "gist_password",
   hostname: "localhost",
   database: "gist",
   stacktrace: true,

@@ -29,6 +29,13 @@ module.exports = {
           DEFAULT: "#9D74EE",
           light: "#BC9AFF"
         }
+      },
+      fontFamily: {
+        brand: ["WorkSans", "sans-serif"]
+      },
+      fontWeight: {
+        regular: "normal",
+        bold: "bold"
       }
     },
   },

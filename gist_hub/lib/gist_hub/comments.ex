@@ -5,7 +5,6 @@ defmodule GistHub.Comments do
 
   import Ecto.Query, warn: false
   alias GistHub.Repo
-
   alias GistHub.Comments.Comment
 
   @doc """
@@ -49,8 +48,9 @@ defmodule GistHub.Comments do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
-    %Comment{}
+  def create_comment(%User{} = user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:comments)
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end

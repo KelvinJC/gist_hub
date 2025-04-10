@@ -147,8 +147,9 @@ defmodule GistHub.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_saved_gist(attrs \\ %{}) do
-    %SavedGist{}
+  def create_saved_gist(%User{} = user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:saved_gists)
     |> SavedGist.changeset(attrs)
     |> Repo.insert()
   end

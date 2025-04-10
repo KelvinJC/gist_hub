@@ -4,10 +4,9 @@ defmodule GistHub.Gists do
   """
 
   import Ecto.Query, warn: false
-  alias ElixirLS.LanguageServer.Plugins.Ecto
   alias GistHub.Repo
-
   alias GistHub.Gists.Gist
+  alias GistHub.Accounts.User
 
   @doc """
   Returns the list of gists.

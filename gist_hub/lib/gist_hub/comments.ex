@@ -6,6 +6,7 @@ defmodule GistHub.Comments do
   import Ecto.Query, warn: false
   alias GistHub.Repo
   alias GistHub.Comments.Comment
+  alias GistHub.Accounts.User
 
   @doc """
   Returns the list of comments.

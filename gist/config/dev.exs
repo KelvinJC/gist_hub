@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :gist, Gist.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "",
+  password: "",
   hostname: "localhost",
-  database: "gist_dev",
+  database: "gist",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

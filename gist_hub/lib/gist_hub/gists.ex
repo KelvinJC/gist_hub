@@ -4,6 +4,7 @@ defmodule GistHub.Gists do
   """
 
   import Ecto.Query, warn: false
+  alias ElixirLS.LanguageServer.Plugins.Ecto
   alias GistHub.Repo
 
   alias GistHub.Gists.Gist
@@ -49,8 +50,9 @@ defmodule GistHub.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_gist(attrs \\ %{}) do
-    %Gist{}
+  def create_gist(%User{} = user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:gists)
     |> Gist.changeset(attrs)
     |> Repo.insert()
   end

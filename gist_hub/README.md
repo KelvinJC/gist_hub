@@ -23,3 +23,5 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 - mix deps.get
 - mix phx.gen.auth ContextName SchemaName database_table_name 
 - mix ecto.setup
+- mix phx.gen.context Gists Gist gists user_id:references:users name:string description:text markup_text:text
+- mix phx.gen.context Gists SavedGist saved_gists gist_id:references:gists user_id:references:users 

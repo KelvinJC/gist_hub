@@ -14,7 +14,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#FD4F00",
+        ghDark: {
+          dark: "#010101",
+          DEFAULT: "#3C3B3B",
+          light: "#828282"
+        },
+        ghPurple: {
+          dark: "#631A61",
+          DEFAULT: "#A834A5",
+          light: "#E88FE5"        
+        },
+        ghLavender: {
+          dark: "#8C52FF",
+          DEFAULT: "#9D74EE",
+          light: "#BC9AFF"
+        }
       }
     },
   },

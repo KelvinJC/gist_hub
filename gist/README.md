@@ -16,3 +16,10 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+## Project initiation commands
+- mix phx.new --no-install --binary-id
+- mix deps.get
+- mix phx.gen.auth ContextName SchemaName database_table_name 
+- mix ecto.setup

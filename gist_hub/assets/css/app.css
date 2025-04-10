@@ -15,3 +15,9 @@
     font-weight: bold;
     font-style: normal;
 }
+
+.round-image-padding {
+    border-radius: 50%;
+    border: 1.5px solid #ffffff;
+    padding: 2px;
+}

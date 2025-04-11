@@ -24,7 +24,9 @@
       </button>
       <div 
         id="dropdown_menu"
-        class="dropdown-menu-arrow absolute right-0 mt-2 py-2 w-48 bg-ghDark rounded-lg shadow-xl border border-white">
+        class="dropdown-menu-arrow absolute right-0 mt-2 py-2 w-48 bg-ghDark rounded-lg shadow-xl border border-white"
+        hidden="true"
+        >
         <%= if @current_user do %>  
           <.link 
           href={~p"/users/settings"}

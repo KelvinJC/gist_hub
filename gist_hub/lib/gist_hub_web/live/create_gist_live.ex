@@ -1,6 +1,5 @@
 defmodule GistHubWeb.CreateGistLive do
   use GistHubWeb, :live_view
-  import Phoenix.HTML.Form
   alias GistHub.{Gists, Gists.Gist}
 
   def mount(_params, _session, socket) do

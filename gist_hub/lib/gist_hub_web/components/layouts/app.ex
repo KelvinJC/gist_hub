@@ -1,5 +1,5 @@
 defmodule GistHubWeb.Layouts.App do
-  alias Phoenix.Liveview.JS
+  alias Phoenix.LiveView.JS
 
   def toggle_dropdown_menu do
     JS.toggle(to: "#dropdown_menu")

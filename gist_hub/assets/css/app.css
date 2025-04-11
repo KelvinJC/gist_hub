@@ -16,6 +16,11 @@
     font-style: normal;
 }
 
+.gh-gradient {
+    background-image: linear-gradient(to bottom, #631A61, #551653, #340E33, #010101);
+    height: 225px;
+}
+
 .dropdown-menu-arrow::before {
   content: "";
   position: absolute;

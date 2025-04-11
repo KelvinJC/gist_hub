@@ -25,15 +25,14 @@
       <div 
         id="dropdown_menu"
         class="absolute right-0 mt-2 py-2 w-48 bg-ghDark rounded-lg shadow-xl border border-white">
-        <%= if @current_user do %> 
-         
+        <%= if @current_user do %>  
           <.link 
-          href=""
+          href={~p"/users/settings"}
           class="menu-item  border-b border-white border-opacity-50"
           role="menuitem"
           tabindex="-1"
           method="get"
-          id="user-menu-item-5"
+          id="user-menu-item-0"
           >
           Signed in as <%= @current_user.email %>
           </.link>

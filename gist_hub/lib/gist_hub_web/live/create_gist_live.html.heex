@@ -3,6 +3,15 @@
         Instantly share Elixir code, notes and snippets.
     </h1>
 </div>
-<.form>
-
+<.form for={@form}>
+    <div class="justify-center px-28 w-full space-y-4 mb-10">
+        <.input field={@form[:description]} placeholder="Gist Description..." autocomplete="off" />
+        <div>
+            <div class="flex items-center p-2 bg-ghDark rounded-t-md border">
+                <div class="w-[300px] mb-2">
+                    <.input field={@form[:name]} placeholder="Filename including extension..." autocomplete="off" />
+                </div>
+            </div>
+        </div>
+    </div>
 </.form>

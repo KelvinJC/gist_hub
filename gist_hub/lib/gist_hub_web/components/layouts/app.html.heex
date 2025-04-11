@@ -25,7 +25,38 @@
       <div 
         id="dropdown_menu"
         class="absolute right-0 mt-2 py-2 w-48 bg-ghDark rounded-lg shadow-xl border border-white">
-        <%= if @current_user do %>  
+        <%= if @current_user do %> 
+         
+          <.link 
+          href=""
+          class="menu-item  border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-5"
+          >
+          Signed in as <%= @current_user.email %>
+          </.link>
+          <.link 
+          href=""
+          class="menu-item"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-4"
+          >
+          Your gists
+          </.link>
+          <.link 
+          href=""
+          class="menu-item  border-b border-white border-opacity-50"
+          role="menuitem"
+          tabindex="-1"
+          method="get"
+          id="user-menu-item-3"
+          >
+          Saved gists
+          </.link>
           <.link 
           href={~p"/users/log_out"}
           class="menu-item"

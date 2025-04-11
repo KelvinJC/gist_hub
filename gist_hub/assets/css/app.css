@@ -55,3 +55,16 @@
   border-color: white transparent transparent transparent;
   border-style: solid;  
 }
+
+form input[type="text"] {
+    @apply bg-ghDark-dark font-brand font-regular text-xs text-white border border-white;
+}
+
+form input[type="text"]:focus {
+    @apply focus:outline-none focus:border-ghLavender focus:ring-0;
+}
+.textarea {
+    @apply bg-ghDark-dark font-brand font-regular text-white text-xs border border-white h-[300px] resize-none;
+    border-top: none; 
+}
+

@@ -28,6 +28,8 @@
           <.input 
           type="textarea"
           field={@form[:markup_text]}
+          id="gist-textarea"
+          phx-hook="UpdateLineNumbers"
           class="textarea w-full rounded-br-md"
           placeholder="Insert code..."
           spellcheck="false"

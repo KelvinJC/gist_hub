@@ -72,3 +72,11 @@ form input[type="text"]:focus {
 .textarea:focus {
     @apply focus:outline-none focus:border-white focus:ring-0
 }
+
+.create_button {
+    @apply bg-ghPurple border border-white font-brand font-regular text-black text-base;
+}
+
+.create_button:hover {
+    @apply hover:bg-ghPurple-dark text-ghDark-light border-ghDark-light ;
+}

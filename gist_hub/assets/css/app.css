@@ -63,8 +63,12 @@ form input[type="text"] {
 form input[type="text"]:focus {
     @apply focus:outline-none focus:border-ghLavender focus:ring-0;
 }
+
 .textarea {
     @apply bg-ghDark-dark font-brand font-regular text-white text-xs border border-white h-[300px] resize-none;
-    border-top: none; 
+    border-top: none;
 }
 
+.textarea:focus {
+    @apply focus:outline-none focus:border-white focus:ring-0
+}

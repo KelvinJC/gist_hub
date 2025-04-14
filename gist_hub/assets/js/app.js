@@ -27,17 +27,24 @@ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("
 let Hooks = {};
 Hooks.UpdateLineNumbers = {
   mounted() {
+    const lineNumberText = document.querySelector("#line-numbers")
+
     this.el.addEventListener("input", () => {
       this.updateLineNumbers()
     })
 
     this.el.addEventListener("scroll", () => {
-      const lineNumberText = document.querySelector("#line-numbers")
       lineNumberText.scrollTop = this.el.scrollTop
+    })
+
+    this.handleEvent("clear-textarea", () => {
+      this.el.value = ""
+      lineNumberText.value = "1\n"
     })
 
     this.updateLineNumbers()
   },
+
   updateLineNumbers() {
     const lineNumberText = document.querySelector("#line-numbers")
     if (!lineNumberText) return;

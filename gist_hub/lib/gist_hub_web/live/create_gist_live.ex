@@ -16,7 +16,8 @@ defmodule GistHubWeb.CreateGistLive do
         # trigger client side event on successful creation of gist
         socket = push_event(socket, "clear-textarea", %{})
         changeset = Gists.change_gist(%Gist{})
-        {:noreply, assign(socket, :form, to_form(changeset))}
+        socket = assign(socket, :form, to_form(changeset))
+        {:noreply, push_navigate(socket, to: ~p"/gist")}
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :form, to_form(changeset))}
     end

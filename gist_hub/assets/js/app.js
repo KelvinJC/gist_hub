@@ -72,6 +72,15 @@ Hooks.UpdateLineNumbers = {
   }
 };
 
+Hooks.Highlight = {
+  mounted() {
+    let codeBlock = this.el.querySelector("pre code")
+    if (codeBlock) {
+      hljs.highlightElement(codeBlock);
+    }
+  }
+}
+
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},

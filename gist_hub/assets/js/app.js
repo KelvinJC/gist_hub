@@ -106,12 +106,14 @@ Hooks.Highlight = {
         return "python";
       case "dart":
         return "dart";
+      case "h":
       case "c":
         return "c";
       case "php":
         return "php";
       case "cs":
         return "csharp";
+      case "hpp":
       case "cpp":
         return "cpp";
       case "rb":

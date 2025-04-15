@@ -28,7 +28,8 @@ module.exports = {
           dark: "#8C52FF",
           DEFAULT: "#9D74EE",
           light: "#BC9AFF"
-        }
+        },
+        ghSyntax: "#0E1116"
       },
       fontFamily: {
         brand: ["WorkSans", "sans-serif"]

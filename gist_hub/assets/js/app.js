@@ -84,6 +84,10 @@ Hooks.Highlight = {
   },
 
   getSyntaxType(name) {
+    if (name === "Dockerfile") {
+      return "dockerfile";
+    }
+
     let extension = name.split(".").pop();
     switch(extension) {
       case "txt":
@@ -110,6 +114,21 @@ Hooks.Highlight = {
         return "csharp";
       case "cpp":
         return "cpp";
+      case "rb":
+        return "ruby";
+      case "go":
+        return "go";
+      case "rs":
+        return "rust";
+      case "java":
+        return "java";
+      case "sh":
+        return "bash";
+      case "yml":
+      case "yaml":
+        return "yaml";
+      case "css":
+        return "css";
       default:
         return "elixir";
     }

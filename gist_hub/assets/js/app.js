@@ -43,7 +43,7 @@ Hooks.UpdateLineNumbers = {
     const lineNumberText = document.querySelector("#line-numbers")
 
     this.el.addEventListener("input", () => {
-      this.updateLineNumbers()
+      updateLineNumbers(this.el.value)
     })
 
     this.el.addEventListener("scroll", () => {
@@ -68,7 +68,7 @@ Hooks.UpdateLineNumbers = {
       lineNumberText.value = "1\n"
     })
 
-    this.updateLineNumbers()
+    updateLineNumbers(this.el.value)
   }
 };
 

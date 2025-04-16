@@ -97,6 +97,8 @@ Hooks.Highlight = {
       case "html":
       case "heex":
         return "html";
+      case "xml":
+        return "xml";
       case "js":
         return "javascript";
       case "erl":

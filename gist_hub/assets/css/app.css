@@ -74,6 +74,14 @@ form input[type="text"]:focus {
     @apply focus:outline-none focus:border-white focus:ring-0
 }
 
+.interactive-icon:hover {
+    filter: brightness(70%);
+}
+
+.interactive-icon:active {
+    transform: scale(1.2);
+}
+
 .line-numbers {
     @apply border border-white font-brand font-regular text-xs text-ghDark-light bg-ghDark-dark h-[300px] w-[54px] text-right overflow-hidden resize-none;
     border-right: none;

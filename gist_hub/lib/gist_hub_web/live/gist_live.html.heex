@@ -41,10 +41,11 @@
       </button>
       <% end %>
       <button 
+        id="copy-button"
         class="px-1" 
         type="button" 
         phx-hook="CopyToClipboard" 
-        clipboard-data={@gist.markup_text}
+        clipboard-data-gist={@gist.markup_text}
       >
         <img src="/images/copy.svg" alt="Copy Button">
       </button>

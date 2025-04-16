@@ -96,6 +96,7 @@ Hooks.Highlight = {
     if (name === "Dockerfile") {
       return "dockerfile";
     }
+
     let extension = name.split(".").pop();
     return syntaxSet[extension];
   },
@@ -108,6 +109,23 @@ Hooks.Highlight = {
     }
     codeBlock.textContent = lines.join("\n");
     return codeBlock;
+  }
+}
+
+Hooks.CopyToClipboard = {
+  mounted() {
+    this.el.addEventListener("click", (e) => {
+      const textToCopy = this.el.getAttribute("clipboard-data-gist");
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          console.log("Gist copied to clipboard")
+        })
+        .catch(err => {
+          console.error("Failed to copy text: ", err)
+        })
+      }
+    })
   }
 }
 

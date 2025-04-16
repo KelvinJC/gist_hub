@@ -40,7 +40,12 @@
                 <img src="/images/edit.svg" alt="Edit Button">
             </button>
             <% end %>
-            <button class="px-1"  type="button" phx-click={}>
+            <button 
+                class="px-1" 
+                type="button" 
+                phx-hook="CopyToClipboard" 
+                clipboard-data={@gist.markup_text}
+            >
                 <img src="/images/copy.svg" alt="Copy Button">
             </button>
         </div>

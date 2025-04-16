@@ -27,6 +27,16 @@ import hljs from "highlight.js"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
+function updateLineNumbers(value) {
+  const lineNumberText = document.querySelector("#line-numbers")
+  if (!lineNumberText) return;
+  const lines = value.split("\n")
+
+  const numbers = lines.map((_, index) => index + 1).join("\n") + "\n"
+
+  lineNumberText.value = numbers
+}
+
 let Hooks = {};
 Hooks.UpdateLineNumbers = {
   mounted() {
@@ -59,16 +69,6 @@ Hooks.UpdateLineNumbers = {
     })
 
     this.updateLineNumbers()
-  },
-
-  updateLineNumbers() {
-    const lineNumberText = document.querySelector("#line-numbers")
-    if (!lineNumberText) return;
-    const lines = this.el.value.split("\n")
-
-    const numbers = lines.map((_, index) => index + 1).join("\n") + "\n"
-
-    lineNumberText.value = numbers
   }
 };
 

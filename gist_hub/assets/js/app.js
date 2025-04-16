@@ -84,57 +84,18 @@ Hooks.Highlight = {
   },
 
   getSyntaxType(name) {
+    const syntaxSet = {
+      "exs": "elixir", "ex": "elixir", "json": "json", "html": "html", "heex": "html", "js": "javascript", 
+      "erl": "erlang", "py": "python", "dart": "dart", "h": "c", "c": "c", "php": "php", "cs": "csharp",
+      "hpp": "cpp", "cpp": "cpp", "rb": "ruby", "go": "go", "rs": "rust", "java": "java", "sh": "bash",
+      "yml": "yaml", "yaml": "yaml", "css": "css", "xml": "xml"
+    }
+
     if (name === "Dockerfile") {
       return "dockerfile";
     }
-
     let extension = name.split(".").pop();
-    switch(extension) {
-      case "txt":
-        return "text";
-      case "json":
-        return "json";
-      case "html":
-      case "heex":
-        return "html";
-      case "xml":
-        return "xml";
-      case "js":
-        return "javascript";
-      case "erl":
-        return "erlang";
-      case "py":
-        return "python";
-      case "dart":
-        return "dart";
-      case "h":
-      case "c":
-        return "c";
-      case "php":
-        return "php";
-      case "cs":
-        return "csharp";
-      case "hpp":
-      case "cpp":
-        return "cpp";
-      case "rb":
-        return "ruby";
-      case "go":
-        return "go";
-      case "rs":
-        return "rust";
-      case "java":
-        return "java";
-      case "sh":
-        return "bash";
-      case "yml":
-      case "yaml":
-        return "yaml";
-      case "css":
-        return "css";
-      default:
-        return "elixir";
-    }
+    return syntaxSet[extension];
   }
 }
 

@@ -80,6 +80,7 @@ Hooks.Highlight = {
       codeBlock.className = codeBlock.className.replace(/language-\S+/g, "");
       codeBlock.classList.add(`language-${this.getSyntaxType(name)}`);
       hljs.highlightElement(codeBlock);
+      updateLineNumbers(codeBlock.textContent)
     }
   },
 

@@ -86,8 +86,15 @@ defmodule GistHub.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_gist(%Gist{} = gist) do
-    Repo.delete(gist)
+  def delete_gist(%User{} = user, gist_id) do
+    gist = Repo.get!(Gist, gist_id)
+
+    if user.id == gist.user_id do
+      Repo.delete(gist)
+      {:ok, gist}
+    else
+      {:error, :unauthorised}
+    end
   end
 
   @doc """

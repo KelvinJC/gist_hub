@@ -32,14 +32,16 @@
             <%= @gist.name %>
         </div>
         <div>
+            <%= if @current_user.id == @gist.user_id do %>
+            <button class="px-1"  type="button" phx-click={}>
+                <img src="/images/delete.svg" alt="Delete Button">
+            </button>
             <button class="px-1"  type="button" phx-click={}>
                 <img src="/images/edit.svg" alt="Edit Button">
             </button>
+            <% end %>
             <button class="px-1"  type="button" phx-click={}>
                 <img src="/images/copy.svg" alt="Copy Button">
-            </button>
-            <button class="px-1"  type="button" phx-click={}>
-                <img src="/images/delete.svg" alt="Delete Button">
             </button>
         </div>
     </div>

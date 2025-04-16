@@ -53,6 +53,7 @@
         class="px-1" 
         type="button" 
         phx-hook="CopyToClipboard" 
+        phx-click={JS.transition("animate-bounce", to: "#copy-button")}
         clipboard-data-gist={@gist.markup_text}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-5" aria-label="Copy Button">

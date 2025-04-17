@@ -2,6 +2,7 @@ defmodule GistHubWeb.GistLive do
   use GistHubWeb, :live_view
   use Timex
   alias GistHub.Gists
+  alias GistHubWeb.GistFormComponent
 
   def mount(%{"id" => id}, _session, socket) do
     gist = Gists.get_gist!(id)

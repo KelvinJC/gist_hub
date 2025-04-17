@@ -98,7 +98,7 @@ Hooks.Highlight = {
     }
 
     let extension = name.split(".").pop();
-    return syntaxSet[extension];
+    return syntaxSet[extension] || "text";
   },
 
   trimCodeBlock(codeBlock) {

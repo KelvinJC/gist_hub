@@ -3,10 +3,6 @@ defmodule GistHubWeb.GistFormComponent do
   alias GistHub.{Gists, Gists.Gist}
 
   def mount(socket) do
-    socket = assign(
-      socket,
-      form: to_form(Gists.change_gist(%Gist{}))
-    )
     {:ok, socket}
   end
 

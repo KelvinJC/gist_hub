@@ -129,6 +129,19 @@ Hooks.CopyToClipboard = {
   }
 }
 
+Hooks.ToggleEdit = {
+  mounted() {
+    this.el.addEventListener("click", () => {
+      let edit = document.getElementById("edit-section")
+      let syntax = document.getElementById("syntax-section")
+      if (edit && syntax) {
+        edit.style.display = "block";
+        syntax.style.display = "none";
+      }
+    })
+  }
+}
+
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},

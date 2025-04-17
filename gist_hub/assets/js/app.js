@@ -87,10 +87,10 @@ Hooks.Highlight = {
 
   getSyntaxType(name) {
     const syntaxSet = {
-      "exs": "elixir", "ex": "elixir", "json": "json", "html": "html", "heex": "html", "js": "javascript", 
+      "txt": "text", "exs": "elixir", "ex": "elixir", "json": "json", "html": "html", "heex": "html", "js": "javascript", 
       "erl": "erlang", "py": "python", "dart": "dart", "h": "c", "c": "c", "php": "php", "cs": "csharp",
       "hpp": "cpp", "cpp": "cpp", "rb": "ruby", "go": "go", "rs": "rust", "java": "java", "sh": "bash",
-      "yml": "yaml", "yaml": "yaml", "css": "css", "xml": "xml"
+      "yml": "yaml", "yaml": "yaml", "css": "css", "xml": "xml", "sql": "sql"
     }
 
     if (name === "Dockerfile") {

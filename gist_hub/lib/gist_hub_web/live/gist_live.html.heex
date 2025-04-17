@@ -11,7 +11,7 @@
         <div class="font-brand font-bold text-base text-ghLavender-dark">
           <%= @current_user.email %> <span class="text-white">/</span> <%= @gist.name%>
         </div>
-        <div class="text-lg text-white font-brand font-bold"><%= @gist.updated_at %></div>
+        <div class="text-lg text-white font-brand font-bold">Last updated <%= @gist.relative %></div>
         <p class="text-left text-white text-sm font-brand"><%= @gist.description %></p>
       </div>
     </div>

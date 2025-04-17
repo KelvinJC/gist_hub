@@ -27,8 +27,8 @@ import hljs from "highlight.js"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
-function updateLineNumbers(value) {
-  const lineNumberText = document.querySelector("#line-numbers")
+function updateLineNumbers(value, element="#line-numbers") {
+  const lineNumberText = document.querySelector(element)
   if (!lineNumberText) return;
   const lines = value.split("\n")
 
@@ -81,7 +81,7 @@ Hooks.Highlight = {
       codeBlock.classList.add(`language-${this.getSyntaxType(name)}`);
       trimmed = this.trimCodeBlock(codeBlock)
       hljs.highlightElement(trimmed);
-      updateLineNumbers(trimmed.textContent)
+      updateLineNumbers(trimmed.textContent, "#syntax-line-numbers")
     }
   },
 

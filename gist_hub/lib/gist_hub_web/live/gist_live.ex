@@ -2,12 +2,17 @@ defmodule GistHubWeb.GistLive do
   use GistHubWeb, :live_view
   use Timex
   alias GistHub.Gists
+  alias GistHubWeb.GistFormComponent
 
   def mount(%{"id" => id}, _session, socket) do
     gist = Gists.get_gist!(id)
     {:ok, relative_time} = Timex.format(gist.updated_at, "{relative}", :relative)
     gist = Map.put(gist, :relative, relative_time)
-    {:ok, assign(socket, gist: gist)}
+    socket_updated =
+      socket
+      |> assign(gist: gist)
+      |> assign(show_form: false)
+    {:ok, socket_updated}
   end
 
   def handle_event("delete", %{"id" => id}, socket) do
@@ -24,5 +29,10 @@ defmodule GistHubWeb.GistLive do
       _ ->
       {:noreply, socket}
     end
+  end
+
+  def handle_event("toggle_edit", _, socket) do
+    socket = assign(socket, :show_form, true)
+    {:noreply, socket}
   end
 end

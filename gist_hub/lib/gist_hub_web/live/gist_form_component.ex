@@ -46,9 +46,15 @@ defmodule GistHubWeb.GistFormComponent do
                 </div>
               </div>
             </div>
-            <div class="flex justify-end">
-                <.button class="create_button" phx-disable-with="Creating...">Create gist</.button>
-            </div>
+            <%= if @id == :new do %>
+              <div class="flex justify-end">
+                  <.button class="create_button" phx-disable-with="Creating...">Create gist</.button>
+              </div>
+            <% else %>
+              <div class="flex justify-end">
+                  <.button class="create_button" phx-disable-with="Updating...">Update gist</.button>
+              </div>
+            <% end %>
           </div>
         </.form>
       <% end %>

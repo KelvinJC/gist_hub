@@ -95,10 +95,6 @@ defmodule GistHubWeb.GistFormComponent do
     params = Map.put(params, "id", socket.assigns.id)
     case Gists.update_gist(socket.assigns.current_user, params) do
       {:ok, gist} ->
-        # trigger client side event on successful update of gist
-        socket = push_event(socket, "clear-textarea", %{})
-        changeset = Gists.change_gist(%Gist{})
-        socket = assign(socket, :form, to_form(changeset))
         {:noreply, push_navigate(socket, to: ~p"/gist?#{[id: gist]}")}
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :form, to_form(changeset))}

@@ -1,13 +1,11 @@
 defmodule GistHubWeb.GistLive do
   use GistHubWeb, :live_view
-  use Timex
   alias GistHub.Gists
-  alias GistHubWeb.GistFormComponent
+  alias GistHubWeb.{GistFormComponent, Utils.DateFormat}
 
   def mount(%{"id" => id}, _session, socket) do
     gist = Gists.get_gist!(id)
-    {:ok, relative_time} = Timex.format(gist.updated_at, "{relative}", :relative)
-    gist = Map.put(gist, :relative, relative_time)
+    gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
     socket_updated =
       socket
       |> assign(gist: gist)

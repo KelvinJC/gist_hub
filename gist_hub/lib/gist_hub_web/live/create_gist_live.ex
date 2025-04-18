@@ -17,7 +17,8 @@ defmodule GistHubWeb.CreateGistLive do
       <.live_component
         module={GistFormComponent}
         form={to_form(Gists.change_gist(%Gist{}))}
-        id={:new} current_user={@current_user}
+        id={:new}
+        current_user={@current_user}
       />
     """
   end

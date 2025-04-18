@@ -1,6 +1,7 @@
 defmodule GistHubWeb.AllGistsLive do
   use GistHubWeb, :live_view
   alias GistHub.Gists
+  alias GistHubWeb.Utils.DateFormat
 
   def mount(_params, _uri, socket) do
     {:ok, socket}
@@ -37,7 +38,7 @@ defmodule GistHubWeb.AllGistsLive do
               </.link>
             </div>
             <div class="font-bold text-white text-lg">
-              <%= @gist.updated_at %>
+              <%= DateFormat.get_relative_time(@gist.updated_at) %>
             </div>
             <p class="text-white text-sm">
               <%= @gist.description %>

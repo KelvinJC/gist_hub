@@ -120,14 +120,12 @@ form input[type="text"]:focus {
 
 .all-syntax-area {
     @apply bg-ghSyntax border border-white rounded-tr-md text-xs h-auto overflow-hidden;
-    /* border-top: none; */
     border-left: none;
 }
 
 .all-syntax-numbers {
    @apply border border-white rounded-tl-md font-brand py-[12px] text-xs text-ghDark-light bg-ghSyntax h-auto w-[54px] text-right overflow-hidden resize-none;
    border-right: none;
-   /* border-top: none; */
 }
 
 .all-syntax-numbers:focus {
@@ -141,3 +139,4 @@ form input[type="text"]:focus {
 .create_button:hover {
     @apply hover:bg-ghPurple-dark text-ghDark-light border-ghDark-light ;
 }
+

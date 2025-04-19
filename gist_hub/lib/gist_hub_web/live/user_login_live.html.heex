@@ -22,50 +22,21 @@
       placeholder="Email"
       required
       />
-
-    <.input 
-      field={@form[:password]} 
-      type="password"
-      placeholder="Password" 
-      required
-    /> 
- 
+      <.input 
+        field={@form[:password]} 
+        type="password"
+        placeholder="Password" 
+        required
+      /> 
       <div class="flex justify-between items-center font-brand font-regular">
         <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
         <.link href={~p"/users/reset_password"} class="text-ghDark-light text-xs font-brand font-regular hover:underline hover:text-ghPurple">
           Forgot your password?
         </.link>      
       </div>   
-     
       <div class="flex justify-end">
         <.button class="create_button w-full" phx-disable-with="Logging in...">Sign in <span aria-hidden="true">→</span></.button>
       </div>
     </div>
   </.form>
 </div>
-
-<%!-- 
-<div class="mx-auto max-w-sm">
-     <.form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
-       <.input 
-          field={@form[:email]} 
-          type="email" 
-          placeholder="Email" 
-          required 
-           class="text-m text_brand text-ghDark-light"
-        />
-       <.input field={@form[:password]} type="password" placeholder="Password" required />
-       <div class="flex items-center justify-between py-4">
-         <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-         <.link
-           href={~p"/users/reset_password"}
-           class="text-m text_brand text-ghDark-light "
-         >
-           Forgot your password?
-         </.link>
-       </div>
-       <.button phx-disable-with="Signing in..." class="create_button w-full">
-         Sign in <span aria-hidden="true">→</span>
-       </.button>
-     </.form>
-   </div> --%>

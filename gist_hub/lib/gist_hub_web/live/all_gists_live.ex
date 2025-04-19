@@ -75,5 +75,5 @@ defmodule GistHubWeb.AllGistsLive do
       end
   end
 
-  defp get_preview_text(markup_text), do: ""
+  defp get_preview_text(_), do: ""
 end

@@ -28,19 +28,19 @@ defmodule GistHubWeb.AllGistsLive do
           class="rounded-full w-6 h-6"
           >
           <div class="flex flex-col ml-4">
-            <div class="font-bold text-base text-ghLavender-dark">
-              <%= @gist.id %> <span class="text-white">/</span>
+            <div class="text-base font-brand text-sm">
+              <span class="text-white"><%= @gist.user_id %></span> <span class="font-bold text-white">/</span>
               <.link
               href= {~p"/gist/?id=#{@gist.id}"}
-              class="hover:underline"
+              class="text-ghLavender-dark hover:underline"
               >
               <%= @gist.name %>
               </.link>
             </div>
-            <div class="font-bold text-white text-lg">
-              <%= DateFormat.get_relative_time(@gist.updated_at) %>
+            <div class="font-brand text-ghDark-light text-xs">
+              <%= "Updated " <> DateFormat.get_relative_time(@gist.updated_at) %>
             </div>
-            <p class="text-white text-sm">
+            <p class="text-ghDark-light text-xs">
               <%= @gist.description %>
             </p>
           </div>
@@ -52,15 +52,28 @@ defmodule GistHubWeb.AllGistsLive do
           <span class="text-white h-6 px-1">0</span>
         </div>
       </div>
-        <div id="gist-wrapper" class="flex w-full" phx-hook="TrimAllCodeBlocks">
+        <div id="gist-wrapper" class="flex w-full" >
           <textarea id="syntax-line-numbers" class="all-syntax-numbers rounded-bl-md" readonly></textarea>
-          <div id="highlight" class="all-syntax-area w-full rounded-br-md" phx-hook="Highlight" data-name={@gist.name}>
-            <pre><code class="language-elixir">
-              <%= @gist.markup_text %>
-            </code></pre>
+          <div id="highlight" class="all-syntax-area w-full rounded-br-md" phx-hook="Highlight" data-name={@gist.name} all-gists-flag="true">
+            <pre><code class="language-elixir"><%= get_preview_text(@gist.markup_text) %></code></pre>
           </div>
         </div>
     </div>
     """
   end
+
+  defp get_preview_text(markup_text) when not is_nil(markup_text) do
+    lines =
+      markup_text
+      |> String.trim()
+      |> String.split("\n")
+      if length(lines) > 10 do
+        Enum.take(lines, 10)
+        |> Enum.join("\n")
+      else
+        markup_text
+      end
+  end
+
+  defp get_preview_text(markup_text), do: ""
 end

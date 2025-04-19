@@ -140,3 +140,24 @@ form input[type="text"]:focus {
     @apply hover:bg-ghPurple-dark text-ghDark-light border-ghDark-light ;
 }
 
+form input[type="email"] {
+    @apply bg-ghDark-dark font-brand h-10 font-regular text-xs text-white border border-white;
+}
+
+form input[type="password"] {
+    @apply bg-ghDark-dark font-brand  h-10 font-regular text-xs text-white border border-white;
+}
+
+form input[type="email"]:focus {
+    @apply focus:border-ghLavender focus:ring-0;
+}
+
+form input[type="password"]:focus {
+    @apply focus:border-ghLavender focus:ring-0;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}

@@ -75,11 +75,12 @@ Hooks.UpdateLineNumbers = {
 Hooks.Highlight = {
   mounted() {
     let name = this.el.getAttribute("data-name");
+    let isAllGists = this.el.getAttribute("all-gists-flag") ? true : false;
     let codeBlock = this.el.querySelector("pre code");
     if (name && codeBlock) {
       codeBlock.className = codeBlock.className.replace(/language-\S+/g, "");
       codeBlock.classList.add(`language-${this.getSyntaxType(name)}`);
-      trimmed = this.trimCodeBlock(codeBlock)
+      trimmed = this.trimCodeBlock(codeBlock, isAllGists)
       hljs.highlightElement(trimmed);
       updateLineNumbers(trimmed.textContent, "#syntax-line-numbers")
     }
@@ -101,11 +102,11 @@ Hooks.Highlight = {
     return syntaxSet[extension] || "text";
   },
 
-  trimCodeBlock(codeBlock) {
+  trimCodeBlock(codeBlock, isAllGists=false) {
     const lines = codeBlock.textContent.split("\n");
-    if (lines.length > 2) {
+    if (lines.length > 2 && !isAllGists) {
       lines.shift();
-      lines.pop();
+      lines.pop()
     }
     codeBlock.textContent = lines.join("\n");
     return codeBlock;
@@ -141,6 +142,7 @@ Hooks.ToggleEdit = {
     })
   }
 }
+
 
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,

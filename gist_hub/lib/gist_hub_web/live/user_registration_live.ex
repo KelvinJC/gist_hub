@@ -1,24 +1,28 @@
 defmodule GistHubWeb.UserRegistrationLive do
   use GistHubWeb, :live_view
 
-  alias GistHub.Accounts
-  alias GistHub.Accounts.User
+  alias GistHub.{Accounts, Accounts.User}
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
+    <div class="gh-gradient flex flex-col items-center justify-center">
+      <h1 class="font-brand font-bold text-white text-3xl py-4">
         Register for an account
-        <:subtitle>
-          Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
-            Log in
-          </.link>
+      </h1>
+      <h2 class="font-brand font-regular text-ghDark-light text-sm">
+        Already registered?
+        <.link
+          navigate={~p"/users/log_in"}
+          class="font-brand text-ghLavender-dark text-brand hover:underline hover:text-ghPurple"
+        >
+          Sign in
+        </.link>
           to your account now.
-        </:subtitle>
-      </.header>
+      </h2>
+    </div>
+    <div class="mx-auto max-w-sm">
 
-      <.simple_form
+      <.form
         for={@form}
         id="registration_form"
         phx-submit="save"
@@ -30,14 +34,29 @@ defmodule GistHubWeb.UserRegistrationLive do
         <.error :if={@check_errors}>
           Oops, something went wrong! Please check the errors below.
         </.error>
-
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
-
-        <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
-        </:actions>
-      </.simple_form>
+        <div class="justify-center w-full space-y-8 mb-10">
+          <.input
+          field={@form[:email]}
+          type="email"
+          placeholder="Email"
+          required
+          />
+          <.input
+            field={@form[:password]}
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <div class="flex justify-end">
+            <.button
+              class="create_button w-full"
+              phx-disable-with="Creating account..."
+            >
+              Create an account
+            </.button>
+          </div>
+        </div>
+      </.form>
     </div>
     """
   end

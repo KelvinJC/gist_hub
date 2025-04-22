@@ -38,7 +38,10 @@ defmodule GistHub.Gists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_gist!(id), do: Repo.get!(Gist, id)
+  def get_gist!(id) do
+    Repo.get!(Gist, id)
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a gist.

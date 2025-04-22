@@ -9,7 +9,8 @@ defmodule GistHub.Gists do
   alias GistHub.Accounts.User
 
   @doc """
-  Returns the list of gists.
+  Returns the sorted list of gists
+  with most recently updated gist being first
 
   ## Examples
 
@@ -20,6 +21,27 @@ defmodule GistHub.Gists do
   def list_gists do
     Gist
     |> order_by(desc: :updated_at)
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
+
+  def list_gists("least_recently_updated_at") do
+    Gist
+    |> order_by(asc: :updated_at)
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
+
+  def list_gists("recently_created_at") do
+    Gist
+    |> order_by(desc: :inserted_at)
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
+
+  def list_gists("least_recently_created_at") do
+    Gist
+    |> order_by(asc: :inserted_at)
     |> Repo.all()
     |> Repo.preload(:user)
   end

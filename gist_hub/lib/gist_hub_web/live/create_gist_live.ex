@@ -10,7 +10,7 @@ defmodule GistHubWeb.CreateGistLive do
   def render(assigns) do
     ~H"""
       <div class="gh-gradient flex items-center justify-center">
-        <h1 class="font-brand font-bold text-white text-3xl">
+        <h1 class="font-brand text-white text-xl">
             Instantly share code, notes and snippets.
         </h1>
       </div>

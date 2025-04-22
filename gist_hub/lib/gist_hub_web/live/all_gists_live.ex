@@ -46,11 +46,13 @@ defmodule GistHubWeb.AllGistsLive do
             </p>
           </div>
         </div>
-        <div class="flex items-center">
-          <img src="/images/comment.svg" alt="Comment Count">
-          <span class="text-white h-6 px-1">0</span>
-          <img src="/images/BookmarkOutline.svg" alt="Save Count">
-          <span class="text-white h-6 px-1">0</span>
+        <div class="mr-8 px-3">
+          <div class="flex items-center w-4">
+            <img src="/images/comment.svg" alt="Comment Count">
+            <span class="text-white h-6 px-1">0</span>
+            <img src="/images/BookmarkOutline.svg" alt="Save Count">
+            <span class="text-white h-6 px-1">0</span>
+          </div>
         </div>
       </div>
         <div id="gist-wrapper" class="flex w-full" >

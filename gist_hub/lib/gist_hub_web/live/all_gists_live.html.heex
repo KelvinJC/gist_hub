@@ -1,18 +1,42 @@
-<div class="gh-gradient flex items-center ">
-    <div class="flex justify-between w-full px-20">
-            <h1 class="font-brand font-bold text-3xl text-white">All gists</h1>
-            <div class="bg-transparent border rounded-md flex items-center">
-                <span class="font-brand text-ghDark-light text-sm mr-2 ml-2">
-                    Sort:
-                </span>
-                <span class="font-brand text-white text-sm mr-2">
-                    Recently updated
-                </span> 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="white" class="size-3 mr-2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
+<div class="gh-gradient flex">
+    <div class="flex justify-between w-full px-20 mt-4">
+        <span class="flex py-2">
+            <h1 class="font-brand text-m underline text-white mr-2">All gists </h1>
+            <span class="font-brand text-m text-white mr-2">|</span>
+            <h1 class="font-brand text-m text-ghDark-light"> Your gists</h1>
+        </span>
+            <div class="flex flex-col w-52">
+                <div 
+                    id="sort_button"
+                    phx-click={GistHubWeb.AllGistsLive.toggle_sort_dropdown_menu()}
+                    class="sort-button bg-transparent border rounded-md flex items-center py-2 mb-2 w-full"
+                >
+                    <span class="font-brand text-ghDark-light text-sm mr-2 ml-2">
+                        Sort:
+                    </span>
+                    <span class="font-brand text-white text-sm mr-2">
+                        Recently updated
+                    </span> 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="white" class="size-3 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
+                <div 
+                    id="sort_dropdown_menu" 
+                    class="mt w-full border font-brand text-white bg-ghDark rounded-md"
+                    phx-click-away={GistHubWeb.AllGistsLive.toggle_sort_dropdown_menu()}
+                    hidden="true"
+                    >
+                    <div class="menu-item border-b border-white border-opacity-50">Recently updated</div>
+                    <div class="menu-item border-b border-white border-opacity-50">Recently created</div>
+                    <div class="menu-item">First created </div>
+                </div>
             </div>
     </div>
+    <div class="flex right">
+
+    </div>
+
 </div>
 <div >
     <%= for gist <- @gists do %>

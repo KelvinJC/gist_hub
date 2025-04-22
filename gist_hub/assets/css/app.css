@@ -140,6 +140,11 @@ form input[type="text"]:focus {
     @apply hover:bg-ghPurple-dark text-ghDark-light border-ghDark-light ;
 }
 
+.sort-button:hover {
+    @apply hover:border-ghLavender;
+    border-width: 2px;
+}
+
 form input[type="email"] {
     @apply bg-ghDark-dark font-brand h-10 font-regular text-xs text-white border border-white;
 }

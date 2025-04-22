@@ -21,6 +21,7 @@ defmodule GistHub.Gists do
     Gist
     |> order_by(desc: :updated_at)
     |> Repo.all()
+    |> Repo.preload(:user)
   end
 
   @doc """

@@ -11,7 +11,7 @@ defmodule GistHubWeb.CreateGistLive do
     ~H"""
       <div class="gh-gradient flex items-center justify-center">
         <h1 class="font-brand font-bold text-white text-3xl">
-            Instantly share Elixir code, notes and snippets.
+            Instantly share code, notes and snippets.
         </h1>
       </div>
       <.live_component

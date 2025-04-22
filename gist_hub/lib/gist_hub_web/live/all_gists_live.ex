@@ -1,7 +1,7 @@
 defmodule GistHubWeb.AllGistsLive do
   use GistHubWeb, :live_view
   alias GistHub.Gists
-  alias GistHubWeb.Utils.DateFormat
+  alias GistHubWeb.Utils.{DateFormat, FormatUsername}
   alias Phoenix.LiveView.JS
 
   def mount(_params, _uri, socket) do
@@ -30,7 +30,7 @@ defmodule GistHubWeb.AllGistsLive do
           >
           <div class="flex flex-col ml-4">
             <div class="text-base font-brand text-sm">
-              <span class="text-white"><%= @gist.user_id %></span> <span class="font-bold text-white">/</span>
+              <span class="text-white"><%= FormatUsername.strip_name_from_email(@gist.user.email) %></span> <span class="font-bold text-white">/</span>
               <.link
               href= {~p"/gist/?id=#{@gist.id}"}
               class="text-ghLavender-dark hover:underline"

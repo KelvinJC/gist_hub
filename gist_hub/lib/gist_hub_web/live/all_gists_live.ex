@@ -2,6 +2,7 @@ defmodule GistHubWeb.AllGistsLive do
   use GistHubWeb, :live_view
   alias GistHub.Gists
   alias GistHubWeb.Utils.DateFormat
+  alias Phoenix.LiveView.JS
 
   def mount(_params, _uri, socket) do
     {:ok, socket}
@@ -76,4 +77,12 @@ defmodule GistHubWeb.AllGistsLive do
   end
 
   defp get_preview_text(_), do: ""
+
+  def toggle_sort_dropdown_menu do
+    JS.toggle(
+      to: "#sort_dropdown_menu",
+      in: {"transition ease-out duration-100", "transform opacity-0 translate-y-[-10%]", "transform opacity-0 translate-y-0"},
+      out: {"transition ease-in duration-75", "transform opacity-100 translate-y-0", "transform opacity-0 translate-y-[-10%]"}
+      )
+  end
 end

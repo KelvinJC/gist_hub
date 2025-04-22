@@ -5,36 +5,49 @@ defmodule GistHubWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header class="text-center">
-      Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
-    </.header>
-
-    <div class="space-y-12 divide-y">
+    <div class="gh-gradient flex flex-col items-center justify-center">
+      <h1 class="font-brand font-bold text-white text-3xl py-4">
+        Account Settings
+      </h1>
+      <h2 class="font-brand font-regular text-sm text-ghDark-light">
+        Manage your account email address and password settings
+      </h2>
+    </div>
+    <div class="mx-auto max-w-sm space-y-12 divide-y">
       <div>
-        <.simple_form
+        <.form
           for={@email_form}
           id="email_form"
           phx-submit="update_email"
           phx-change="validate_email"
         >
-          <.input field={@email_form[:email]} type="email" label="Email" required />
+        <div class="justify-center w-full space-y-8 mb-10">
+          <.input 
+            field={@email_form[:email]} 
+            type="email" 
+            placeholder="Email" 
+            required 
+          />
           <.input
             field={@email_form[:current_password]}
             name="current_password"
             id="current_password_for_email"
             type="password"
-            label="Current password"
+            placeholder="Current password"
             value={@email_form_current_password}
             required
           />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Email</.button>
-          </:actions>
-        </.simple_form>
+        </div>
+          <.button
+            class="create_button w-full"
+            phx-disable-with="Changing..."
+          >
+            Change Email
+          </.button>
+        </.form>
       </div>
       <div>
-        <.simple_form
+        <.form
           for={@password_form}
           id="password_form"
           action={~p"/users/log_in?_action=password_updated"}
@@ -49,25 +62,35 @@ defmodule GistHubWeb.UserSettingsLive do
             id="hidden_user_email"
             value={@current_email}
           />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
-          <.input
-            field={@password_form[:password_confirmation]}
-            type="password"
-            label="Confirm new password"
-          />
-          <.input
-            field={@password_form[:current_password]}
-            name="current_password"
-            type="password"
-            label="Current password"
-            id="current_password_for_password"
-            value={@current_password}
-            required
-          />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Password</.button>
-          </:actions>
-        </.simple_form>
+          <div class="justify-center space-y-8 w-full mb-10 mt-12">
+            <.input 
+              field={@password_form[:password]} 
+              type="password" 
+              placeholder="New password" 
+              required 
+            />
+            <.input
+              field={@password_form[:password_confirmation]}
+              type="password"
+              placeholder="Confirm new password"
+            />
+            <.input
+              field={@password_form[:current_password]}
+              name="current_password"
+              type="password"
+              placeholder="Current password"
+              id="current_password_for_password"
+              value={@current_password}
+              required
+            />
+          </div>
+          <.button
+            class="create_button w-full"
+            phx-disable-with="Changing..."
+          >
+            Change Password
+          </.button>
+        </.form>
       </div>
     </div>
     """

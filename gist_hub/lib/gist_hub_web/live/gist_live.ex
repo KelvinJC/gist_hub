@@ -1,7 +1,8 @@
 defmodule GistHubWeb.GistLive do
   use GistHubWeb, :live_view
   alias GistHub.Gists
-  alias GistHubWeb.{GistFormComponent, Utils.DateFormat}
+  alias GistHubWeb.GistFormComponent
+  alias GistHubWeb.Utils.{DateFormat, FormatUsername}
 
   def mount(%{"id" => id}, _session, socket) do
     gist = Gists.get_gist!(id)

@@ -81,8 +81,8 @@ defmodule GistHubWeb.AllGistsLive do
         </div>
       </div>
         <div id="gist-wrapper" class="flex w-full" >
-          <textarea id="syntax-line-numbers" class="all-syntax-numbers rounded-bl-md" readonly></textarea>
-          <div id="highlight" class="all-syntax-area w-full rounded-br-md" phx-hook="Highlight" data-name={@gist.name} all-gists-flag="true">
+          <textarea id={"syntax-line-numbers-#{@index}"} class="all-syntax-numbers rounded-bl-md" readonly></textarea>
+          <div id="highlight" class="all-syntax-area w-full rounded-br-md" phx-hook="Highlight" data-name={@gist.name} gist-index={@index}>
             <pre><code class="language-elixir"><%= get_preview_text(@gist.markup_text) %></code></pre>
           </div>
         </div>

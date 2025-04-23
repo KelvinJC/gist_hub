@@ -26,28 +26,32 @@
                     class="mt w-full border font-brand text-white bg-ghDark rounded-md"
                     phx-click-away={toggle_sort_dropdown_menu()}
                     hidden="true"
-                    >
+                >
                     <.link 
-                        class="menu-item border-b border-white border-opacity-50"
+                        phx-click={toggle_sort_dropdown_menu()}
                         patch={~p"/all?sort_by=recently_updated_at"}
+                        class="menu-item border-b border-white border-opacity-50"
                     >
                         Recently updated
                     </.link>
                     <.link 
-                        class="menu-item border-b border-white border-opacity-50"
+                        phx-click={toggle_sort_dropdown_menu()}
                         patch={~p"/all?sort_by=least_recently_updated_at"}
+                        class="menu-item border-b border-white border-opacity-50"
                     >
                         Least recently updated
                     </.link>
                     <.link 
-                        class="menu-item border-b border-white border-opacity-50"
+                        phx-click={toggle_sort_dropdown_menu()}
                         patch={~p"/all?sort_by=recently_created_at"}
+                        class="menu-item border-b border-white border-opacity-50"
                     >
                         Recently created
                     </.link>
                     <.link 
-                        class="menu-item border-b border-white border-opacity-50"
+                        phx-click={toggle_sort_dropdown_menu()}
                         patch={~p"/all?sort_by=least_recently_created_at"}
+                        class="menu-item border-b border-white border-opacity-50"
                     >
                         Least recently created
                     </.link>

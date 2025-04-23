@@ -74,15 +74,31 @@ Hooks.UpdateLineNumbers = {
 
 Hooks.Highlight = {
   mounted() {
+    this.highlightGists();
+
+    this.handleEvent("sorted", () => {
+      this.highlightGists()
+    })
+  },
+
+  highlightGists() {
     let name = this.el.getAttribute("data-name");
-    let isAllGists = this.el.getAttribute("all-gists-flag") ? true : false;
     let codeBlock = this.el.querySelector("pre code");
+    let gistIndex = this.el.getAttribute("gist-index")
+    let isAllGists = gistIndex ? true : false;
+
     if (name && codeBlock) {
       codeBlock.className = codeBlock.className.replace(/language-\S+/g, "");
       codeBlock.classList.add(`language-${this.getSyntaxType(name)}`);
       trimmed = this.trimCodeBlock(codeBlock, isAllGists)
-      hljs.highlightElement(trimmed);
-      updateLineNumbers(trimmed.textContent, "#syntax-line-numbers")
+      if (isAllGists) {
+        this.applyHighlightToMany();
+        updateLineNumbers(trimmed.textContent, `#syntax-line-numbers-${gistIndex}`);
+      } 
+      else {
+        hljs.highlightElement(trimmed);
+        updateLineNumbers(trimmed.textContent, "#syntax-line-numbers");
+      }
     }
   },
 
@@ -110,7 +126,15 @@ Hooks.Highlight = {
     }
     codeBlock.textContent = lines.join("\n");
     return codeBlock;
-  }
+  },
+  
+  applyHighlightToMany() {
+    this.el.querySelectorAll('pre code')
+    .forEach((el) => {
+      el.removeAttribute('data-highlighted')
+      hljs.highlightElement(el)
+    })
+  },
 }
 
 Hooks.CopyToClipboard = {

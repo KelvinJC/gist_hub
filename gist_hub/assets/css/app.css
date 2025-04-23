@@ -156,3 +156,9 @@ input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
     transition: background-color 5000s ease-in-out 0s;
 }
+
+/* fallback text color and background */
+pre code {
+    @apply text-ghDark-light whitespace-pre
+}
+  

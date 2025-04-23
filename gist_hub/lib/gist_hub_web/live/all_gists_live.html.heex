@@ -27,9 +27,30 @@
                     phx-click-away={GistHubWeb.AllGistsLive.toggle_sort_dropdown_menu()}
                     hidden="true"
                     >
-                    <div class="menu-item border-b border-white border-opacity-50">Recently updated</div>
-                    <div class="menu-item border-b border-white border-opacity-50">Recently created</div>
-                    <div class="menu-item">First created </div>
+                    <.link 
+                        class="menu-item border-b border-white border-opacity-50"
+                        patch={~p"/all?sort_by=recently_updated_at"}
+                    >
+                        Recently updated
+                    </.link>
+                    <.link 
+                        class="menu-item border-b border-white border-opacity-50"
+                        patch={~p"/all?sort_by=least_recently_updated_at"}
+                    >
+                        Least recently updated
+                    </.link>
+                    <.link 
+                        class="menu-item border-b border-white border-opacity-50"
+                        patch={~p"/all?sort_by=recently_created_at"}
+                    >
+                        Recently created
+                    </.link>
+                    <.link 
+                        class="menu-item border-b border-white border-opacity-50"
+                        patch={~p"/all?sort_by=least_recently_created_at"}
+                    >
+                        Least recently created
+                    </.link>
                 </div>
             </div>
     </div>

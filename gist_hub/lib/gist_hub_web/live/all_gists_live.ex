@@ -8,14 +8,39 @@ defmodule GistHubWeb.AllGistsLive do
     {:ok, socket}
   end
 
-  def handle_params(_params, _uri, socket) do
-    gists = Gists.list_gists()
+  def handle_params(params, _uri, socket) do
     socket =
-      assign(
-        socket,
-        gists: gists
-      )
-    {:noreply, socket}
+      case params["sort_by"] do
+        # validate url parameters
+        sort_by when sort_by in ~w(recently_created_at least_recently_created_at recently_updated_at least_recently_updated_at) ->
+          # push event to client
+          socket = push_event(socket, "sorted", %{})
+          assign(socket, sort_by: sort_by)
+        _ ->
+          socket
+      end
+      {:noreply, load_gists(socket)}
+  end
+
+  def load_gists(socket) do
+    sort_by =
+      try do
+        socket.assigns.sort_by
+      rescue
+        _ -> nil # catch `Key.Error` since :sort_by key not assigned yet
+      end
+
+    gists =
+      case sort_by do
+        "recently_updated_at" ->
+          Gists.list_gists()
+        nil ->
+            Gists.list_gists()
+        _ ->
+          Gists.list_gists(sort_by)
+      end
+
+    assign(socket, gists: gists)
   end
 
   def gist(assigns) do

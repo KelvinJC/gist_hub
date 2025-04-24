@@ -5,10 +5,11 @@ defmodule GistHubWeb.UserResetPasswordLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">Reset Password</.header>
-
-      <.simple_form
+    <div class="gh-gradient flex justify-center items-center">
+      <h1 class="font-brand font-bold text-3xl text-white">Reset Password</h1>
+    </div>
+    <div class="mx-auto max-w-sm space-y-12">
+      <.form
         for={@form}
         id="reset_password_form"
         phx-submit="reset_password"
@@ -17,22 +18,36 @@ defmodule GistHubWeb.UserResetPasswordLive do
         <.error :if={@form.errors != []}>
           Oops, something went wrong! Please check the errors below.
         </.error>
-
-        <.input field={@form[:password]} type="password" label="New password" required />
-        <.input
-          field={@form[:password_confirmation]}
-          type="password"
-          label="Confirm new password"
-          required
-        />
-        <:actions>
-          <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
-        </:actions>
-      </.simple_form>
-
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
+        <div class="justify-center space-y-8 w-full mb-10">
+          <.input 
+          field={@form[:password]} 
+          type="password" 
+          placeholder="New password" 
+          required 
+          />
+          <.input
+            field={@form[:password_confirmation]}
+            type="password"
+            placeholder="Confirm new password"
+            required
+          />
+        </div>
+        <.button phx-disable-with="Resetting..." class="create_button w-full">Reset Password</.button>
+      </.form>
+      <p class="font-brand font-regular text-center text-sm text-ghDark-light mt-4">
+        <.link 
+          class="hover:underline hover:text-ghLavender-dark mr-2"
+          href={~p"/users/register"}
+        >
+          Register
+        </.link>
+        | 
+        <.link 
+          class="hover:underline hover:text-ghLavender-dark ml-2"
+          href={~p"/users/log_in"}
+        >
+          Log in
+        </.link>
       </p>
     </div>
     """

@@ -5,6 +5,7 @@ defmodule GistHubWeb.AllGistsLive do
   alias Phoenix.LiveView.JS
 
   def mount(_params, _uri, socket) do
+    socket = assign(socket, :sort_button_text, "Recently updated")
     {:ok, socket}
   end
 
@@ -13,9 +14,11 @@ defmodule GistHubWeb.AllGistsLive do
       case params["sort_by"] do
         # validate url parameters
         sort_by when sort_by in ~w(recently_created_at least_recently_created_at recently_updated_at least_recently_updated_at) ->
+          socket
+          |> assign(:sort_by, sort_by)
+          |> assign(:sort_button_text, get_button_text(sort_by))
           # push event to client
-          socket = push_event(socket, "sorted", %{})
-          assign(socket, sort_by: sort_by)
+          |> push_event("sorted", %{})
         _ ->
           socket
       end
@@ -104,6 +107,16 @@ defmodule GistHubWeb.AllGistsLive do
   end
 
   defp get_preview_text(_), do: ""
+
+  defp get_button_text(sort_type) when is_binary(sort_type) do
+    case sort_type do
+      "recently_updated_at" -> "Recently updated"
+      "least_recently_updated_at" -> "Least recently updated"
+      "recently_created_at" -> "Recently created"
+      "least_recently_created_at" -> "Least recently created"
+      _ -> "Recently updated"
+    end
+  end
 
   def toggle_sort_dropdown_menu do
     JS.toggle(

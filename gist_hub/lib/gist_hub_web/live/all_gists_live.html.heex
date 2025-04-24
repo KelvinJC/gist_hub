@@ -5,17 +5,17 @@
       <span class="font-brand text-m text-white mr-2">|</span>
       <h1><span class="font-brand text-m text-ghDark-light hover:text-ghLavender">Your gists</span></h1>
     </span>
-      <div class="flex flex-col w-52">
+      <div class="flex flex-col w-54">
         <div 
           id="sort_button"
-          phx-click={GistHubWeb.AllGistsLive.toggle_sort_dropdown_menu()}
+          phx-click={toggle_sort_dropdown_menu()}
           class="sort-button bg-transparent border rounded-md flex items-center py-2 mb-2 w-full"
         >
           <span class="font-brand text-ghDark-light text-sm mr-2 ml-2">
             Sort:
           </span>
-          <span class="font-brand text-white text-sm mr-2">
-            Recently updated
+          <span id="sort_button_text" class="font-brand text-white text-sm mr-2">
+            <%= @sort_button_text %>
           </span> 
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="white" class="size-3 mr-2">
             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -27,28 +27,28 @@
           phx-click-away={toggle_sort_dropdown_menu()}
           hidden="true"
         >
-          <.link 
+          <.link
             phx-click={toggle_sort_dropdown_menu()}
             patch={~p"/all?sort_by=recently_updated_at"}
             class="menu-item border-b border-white border-opacity-50"
           >
             Recently updated
           </.link>
-          <.link 
+          <.link
             phx-click={toggle_sort_dropdown_menu()}
             patch={~p"/all?sort_by=least_recently_updated_at"}
             class="menu-item border-b border-white border-opacity-50"
           >
             Least recently updated
           </.link>
-          <.link 
+          <.link
             phx-click={toggle_sort_dropdown_menu()}
             patch={~p"/all?sort_by=recently_created_at"}
             class="menu-item border-b border-white border-opacity-50"
           >
             Recently created
           </.link>
-          <.link 
+          <.link
             phx-click={toggle_sort_dropdown_menu()}
             patch={~p"/all?sort_by=least_recently_created_at"}
             class="menu-item border-b border-white border-opacity-50"

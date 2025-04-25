@@ -162,3 +162,14 @@ pre code {
     @apply text-ghDark-light whitespace-pre
 }
   
+.toggle-pwd-icon {
+    stroke: gray
+}
+
+.toggle-pwd-icon:hover {
+    @apply stroke-ghPurple-light
+}
+
+.toggle-pwd-btn:focus {
+    @apply focus:outline-none focus:border-transparent focus:ring-0
+}

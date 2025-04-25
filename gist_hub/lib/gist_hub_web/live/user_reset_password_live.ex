@@ -30,6 +30,7 @@ defmodule GistHubWeb.UserResetPasswordLive do
                 required
               />
             </div>
+            <%= if @pwd_field_has_text do %>
               <button
                 id="hide_new_pwd"
                 class="absolute right-0 mt-3 py-2 px-2 toggle-pwd-btn"
@@ -45,6 +46,7 @@ defmodule GistHubWeb.UserResetPasswordLive do
                   <% end %>
                 </svg>
               </button>
+            <% end %>
           </div>
           <div id="confirm_pwd_wrapper" class="flex relative">
             <div class="w-full">
@@ -103,7 +105,9 @@ defmodule GistHubWeb.UserResetPasswordLive do
         pwd_field: "",
         confirm_pwd_field: "",
         show_password: false,
-        show_confirm_password: false
+        show_confirm_password: false,
+        pwd_field_has_text: false,
+        confirm_pwd_field_has_text: false
       )
 
     form_source =
@@ -138,7 +142,9 @@ defmodule GistHubWeb.UserResetPasswordLive do
       assign(
         socket,
         pwd_field: user_params["password"],
-        confirm_pwd_field: user_params["password_confirmation"]
+        confirm_pwd_field: user_params["password_confirmation"],
+        pwd_field_has_text: String.length(user_params["password"]) > 0,
+        confirm_pwd_field_has_text: String.length(user_params["password_confirmation"]) > 0
       )
     changeset = Accounts.change_user_password(socket.assigns.user, user_params)
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}

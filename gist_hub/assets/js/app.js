@@ -167,6 +167,34 @@ Hooks.ToggleEdit = {
   }
 }
 
+Hooks.TogglePasswordVisibility = {
+  mounted() {
+    const hideIcon = document.getElementById("hide_pwd");
+    const showIcon = document.getElementById("show_pwd");
+    const passwordInput = document.getElementById("pwd_field");
+
+    this.el.addEventListener("input", (e) => {
+      if (e.target.value === '') {
+        showIcon.style.display = "none";
+      } else {
+        showIcon.style.display = "block";
+      }
+    })
+    
+    showIcon.addEventListener("click", () => {
+      passwordInput.type = "text";
+      showIcon.style.display = "none";
+      hideIcon.style.display = "block";
+    });
+
+    hideIcon.addEventListener("click", () => {
+      passwordInput.type = "password";
+      hideIcon.style.display = "none";
+      showIcon.style.display = "block";
+    });
+  }
+}
+
 
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,

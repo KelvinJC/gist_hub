@@ -5,7 +5,11 @@ defmodule GistHubWeb.AllGistsLive do
   alias Phoenix.LiveView.JS
 
   def mount(_params, _uri, socket) do
-    socket = assign(socket, :sort_button_text, "Recently updated")
+    socket = assign(
+      socket,
+      sort_button_text: "Recently updated",
+      sort_by_updated_at: true
+    )
     {:ok, socket}
   end
 
@@ -15,14 +19,16 @@ defmodule GistHubWeb.AllGistsLive do
         # validate url parameters
         sort_by when sort_by in ~w(recently_created_at least_recently_created_at recently_updated_at least_recently_updated_at) ->
           socket
-          |> assign(:sort_by, sort_by)
-          |> assign(:sort_button_text, get_button_text(sort_by))
-          # push event to client
-          |> push_event("sorted", %{})
+          |> assign(
+            sort_by: sort_by,
+            sort_button_text: get_button_text(sort_by),
+            sort_by_updated_at: String.contains?(sort_by, "updated")
+          )
+          |> push_event("sorted", %{}) # push event to client
         _ ->
           socket
       end
-      {:noreply, load_gists(socket)}
+    {:noreply, load_gists(socket)}
   end
 
   def load_gists(socket) do
@@ -58,7 +64,8 @@ defmodule GistHubWeb.AllGistsLive do
           >
           <div class="flex flex-col ml-4">
             <div class="text-base font-brand text-sm">
-              <span class="text-white"><%= FormatUsername.strip_name_from_email(@gist.user.email) %></span> <span class="font-bold text-white">/</span>
+              <span class="text-white"><%= FormatUsername.strip_name_from_email(@gist.user.email) %></span>
+              <span class="font-bold text-white">/</span>
               <.link
               href= {~p"/gist/?id=#{@gist.id}"}
               class="text-ghLavender-dark hover:underline"
@@ -67,13 +74,18 @@ defmodule GistHubWeb.AllGistsLive do
               </.link>
             </div>
             <div class="font-brand text-ghDark-light text-xs">
-              <%= "Updated " <> DateFormat.get_relative_time(@gist.updated_at) %>
+              <%=
+               @sort_by_updated_at
+               && "Last active " <> DateFormat.get_relative_time(@gist.updated_at)
+               || "Created " <> DateFormat.get_relative_time(@gist.inserted_at)
+              %>
             </div>
             <p class="text-ghDark-light text-xs">
               <%= @gist.description %>
             </p>
           </div>
         </div>
+
         <div class="mr-8 px-3">
           <div class="flex items-center w-4">
             <img src="/images/comment.svg" alt="Comment Count">

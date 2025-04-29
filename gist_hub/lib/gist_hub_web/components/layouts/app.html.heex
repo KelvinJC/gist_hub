@@ -7,6 +7,7 @@
       <div class="text-white font-brand font-bold text-3xl">GistHub</div>
     </a>
     <div class="flex py-2 items-center">
+      <!-- search bar -->
       <.live_component
         module={GistHubWeb.SearchBarComponent}
         form={to_form(%{"search_term" => ""})}
@@ -14,6 +15,7 @@
         current_user={@current_user}
       />
       <.link 
+      <!---->
       href={~p"/all"}
       class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
       >

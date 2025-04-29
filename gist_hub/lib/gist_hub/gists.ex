@@ -36,11 +36,11 @@ defmodule GistHub.Gists do
   # For performing a case-insensitive like in PostgreSQL, see ilike/2.
   # You should be very careful when allowing user sent data to be used as part of LIKE query,
   # since they allow to perform LIKE-injections.
-  def search_gists(search_term) do
-    search_term = search_term <> "%"
+  def search(search_query) do
+    search_query = "%#{search_query}%"
     Repo.all(
       from g in Gist,
-      where: ilike(g.name, ^search_term )
+      where: ilike(g.name, ^search_query)
       # select: g
     )
     |> Repo.preload(:user)

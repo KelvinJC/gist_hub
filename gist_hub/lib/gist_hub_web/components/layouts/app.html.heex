@@ -10,7 +10,7 @@
       <.live_component
         module={GistHubWeb.SearchBarComponent}
         form={to_form(%{"search_term" => ""})}
-        id={@current_user.id}
+        id={ @current_user && @current_user.id || :new}
         current_user={@current_user}
       />
       <.link 

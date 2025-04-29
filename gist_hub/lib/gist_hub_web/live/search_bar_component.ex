@@ -20,7 +20,8 @@ defmodule GistHubWeb.SearchBarComponent do
             placeholder="Search..."
             id={@form[:search_term].id}
             name={@form[:search_term].name}
-            value={@form[:search_term].value}          />
+            value={@form[:search_term].value}
+          />
           <button
             phx-disable-with="."
             class="rounded-r-lg bg-ghDark-dark border-r border-b border-t border-white px-2

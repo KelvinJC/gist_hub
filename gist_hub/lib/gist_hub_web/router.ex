@@ -69,6 +69,7 @@ defmodule GistHubWeb.Router do
       live "/create", CreateGistLive
       live "/gist", GistLive
       live "/all", AllGistsLive
+      live "/search", SearchGistsLive
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end

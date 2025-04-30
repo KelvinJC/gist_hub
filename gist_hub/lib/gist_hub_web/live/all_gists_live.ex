@@ -8,7 +8,8 @@ defmodule GistHubWeb.AllGistsLive do
     socket = assign(
       socket,
       sort_button_text: "Recently updated",
-      sort_by_updated_at: true
+      sort_by_updated_at: true,
+      page_title: "Discover gists"
     )
     {:ok, socket}
   end

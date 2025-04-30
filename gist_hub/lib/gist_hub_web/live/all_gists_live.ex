@@ -1,7 +1,7 @@
 defmodule GistHubWeb.AllGistsLive do
   use GistHubWeb, :live_view
   alias GistHub.Gists
-  alias GistHubWeb.Utils.{DateFormat, FormatUsername}
+  alias GistHubWeb.Utils.{DateFormat, FormatUsername, FormatMarkup}
   alias Phoenix.LiveView.JS
 
   def mount(_params, _uri, socket) do
@@ -86,7 +86,6 @@ defmodule GistHubWeb.AllGistsLive do
             </p>
           </div>
         </div>
-
         <div class="mr-8 px-3">
           <div class="flex items-center w-4">
             <img src="/images/comment.svg" alt="Comment Count">
@@ -99,27 +98,12 @@ defmodule GistHubWeb.AllGistsLive do
         <div id={"gist-wrapper-#{@index}"} class="flex w-full" >
           <textarea id={"syntax-line-numbers-#{@index}"} class="all-syntax-numbers rounded-bl-md" readonly></textarea>
           <div id={"highlight-#{@index}"} class="all-syntax-area w-full rounded-br-md" phx-hook="Highlight" data-name={@gist.name} gist-index={@index}>
-            <pre><code class="language-elixir"><%= get_preview_text(@gist.markup_text) %></code></pre>
+            <pre><code class="language-elixir"><%= FormatMarkup.get_preview_text(@gist.markup_text) %></code></pre>
           </div>
         </div>
     </div>
     """
   end
-
-  defp get_preview_text(markup_text) when not is_nil(markup_text) do
-    lines =
-      markup_text
-      |> String.trim()
-      |> String.split("\n")
-      if length(lines) > 10 do
-        Enum.take(lines, 10)
-        |> Enum.join("\n")
-      else
-        markup_text
-      end
-  end
-
-  defp get_preview_text(_), do: ""
 
   defp get_button_text(sort_type) when is_binary(sort_type) do
     case sort_type do

@@ -38,11 +38,10 @@ defmodule GistHub.Gists do
   # since they allow to perform LIKE-injections.
   def search(search_query) do
     search_query = "%#{search_query}%"
-    Repo.all(
-      from g in Gist,
-      where: ilike(g.name, ^search_query)
-      # select: g
-    )
+    Gist
+    |> order_by(desc: :updated_at)
+    |> where([g] , ilike(g.name, ^search_query))
+    |> Repo.all()
     |> Repo.preload(:user)
   end
 

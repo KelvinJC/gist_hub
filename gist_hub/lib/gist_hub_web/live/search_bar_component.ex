@@ -6,6 +6,10 @@ defmodule GistHubWeb.SearchBarComponent do
     {:ok, socket}
   end
 
+  def handle_event("search", %{"search_term" => search_term}, socket) do
+    {:noreply, push_navigate(socket, to: ~p"/search?#{[query: search_term]}")}
+  end
+
   def render(assigns) do
     ~H"""
     <div>
@@ -22,7 +26,6 @@ defmodule GistHubWeb.SearchBarComponent do
             value={@form[:search_term].value}
           />
           <button
-            phx-disable-with="."
             class="rounded-r-lg bg-ghDark-dark border-r border-b border-t border-white px-2
               focus:outline-none focus:border-ghLavender focus:ring-0"
           >
@@ -39,10 +42,5 @@ defmodule GistHubWeb.SearchBarComponent do
       <% end %>
     </div>
     """
-  end
-
-  def handle_event("search", %{"search_term" => search_term}, socket) do
-    gists = Gists.search_gists(search_term)
-    {:noreply, socket}
   end
 end

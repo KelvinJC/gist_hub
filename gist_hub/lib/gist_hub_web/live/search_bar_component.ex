@@ -1,6 +1,5 @@
 defmodule GistHubWeb.SearchBarComponent do
   use GistHubWeb, :live_component
-  alias GistHub.Gists
 
   def mount(socket) do
     {:ok, socket}

@@ -8,14 +8,14 @@
     </a>
     <div class="flex py-2 items-center">
       <!-- search bar -->
-      <%!-- <%= unless @page_title == "Search" do%> --%>
+      <%= unless @page_title == "Search" do%>
         <.live_component
           module={GistHubWeb.SearchBarComponent}
           form={to_form(%{"search_term" => ""})}
           id={ @current_user && @current_user.id || :new}
           current_user={@current_user}
         />
-      <%!-- <% end %> --%>
+      <% end %>
       <!---->
       <.link 
       href={~p"/all"}

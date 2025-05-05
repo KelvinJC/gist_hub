@@ -8,6 +8,7 @@ defmodule GistHub.Gists.Gist do
     field :name, :string
     field :description, :string
     field :markup_text, :string
+    field :views, :integer, default: 0
     belongs_to :user, GistHub.Accounts.User
     has_many :comments, GistHub.Comments.Comment
 
@@ -17,7 +18,7 @@ defmodule GistHub.Gists.Gist do
   @doc false
   def changeset(gist, attrs) do
     gist
-    |> cast(attrs, [:name, :description, :markup_text, :user_id])
+    |> cast(attrs, [:name, :description, :markup_text, :user_id, :views])
     |> validate_required([:name, :user_id])
   end
 end

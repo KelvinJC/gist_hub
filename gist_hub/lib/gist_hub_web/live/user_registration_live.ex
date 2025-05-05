@@ -88,10 +88,12 @@ defmodule GistHubWeb.UserRegistrationLive do
     socket =
       socket
       |> assign(
+        page_title: "Sign up",
         trigger_submit: false,
         check_errors: false,
         show_password: false,
-        pwd_field_has_text: false, pwd_field: ""
+        pwd_field_has_text: false,
+        pwd_field: ""
       )
       |> assign_form(changeset)
 

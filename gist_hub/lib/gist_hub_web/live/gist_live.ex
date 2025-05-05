@@ -9,8 +9,11 @@ defmodule GistHubWeb.GistLive do
     gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
     socket_updated =
       socket
-      |> assign(gist: gist)
-      |> assign(show_form: false)
+      |> assign(
+        gist: gist,
+        show_form: false,
+        page_title: gist.name
+      )
     {:ok, socket_updated}
   end
 

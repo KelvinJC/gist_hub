@@ -22,11 +22,11 @@ defmodule GistHubWeb.UserSettingsLive do
           phx-change="validate_email"
         >
         <div class="justify-center w-full space-y-8 mb-10">
-          <.input 
-            field={@email_form[:email]} 
-            type="email" 
-            placeholder="Email" 
-            required 
+          <.input
+            field={@email_form[:email]}
+            type="email"
+            placeholder="Email"
+            required
           />
           <.input
             field={@email_form[:current_password]}
@@ -63,11 +63,11 @@ defmodule GistHubWeb.UserSettingsLive do
             value={@current_email}
           />
           <div class="justify-center space-y-8 w-full mb-10 mt-12">
-            <.input 
-              field={@password_form[:password]} 
-              type="password" 
-              placeholder="New password" 
-              required 
+            <.input
+              field={@password_form[:password]}
+              type="password"
+              placeholder="New password"
+              required
             />
             <.input
               field={@password_form[:password_confirmation]}
@@ -122,6 +122,7 @@ defmodule GistHubWeb.UserSettingsLive do
       |> assign(:email_form, to_form(email_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
+      |> assign(:page_title, "Settings")
 
     {:ok, socket}
   end

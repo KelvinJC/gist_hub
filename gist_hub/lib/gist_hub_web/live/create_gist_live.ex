@@ -4,7 +4,7 @@ defmodule GistHubWeb.CreateGistLive do
   alias GistHub.{Gists, Gists.Gist}
 
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, page_title: "Create a new gist")}
   end
 
   def render(assigns) do

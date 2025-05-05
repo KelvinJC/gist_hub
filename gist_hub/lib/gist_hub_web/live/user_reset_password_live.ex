@@ -104,6 +104,7 @@ defmodule GistHubWeb.UserResetPasswordLive do
       socket
       |> assign_user_and_token(params)
       |> assign(
+        page_title: "Password reset",
         pwd_field: "",
         confirm_pwd_field: "",
         show_password: false,

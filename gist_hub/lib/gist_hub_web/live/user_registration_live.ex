@@ -66,7 +66,7 @@ defmodule GistHubWeb.UserRegistrationLive do
                   <% end %>
                 </svg>
               </div>
-            <%= end %>
+            <% end %>
           </div>
           <div class="flex justify-end">
             <.button

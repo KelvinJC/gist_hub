@@ -8,7 +8,7 @@ defmodule GistHubWeb.GistLive do
     Increment view count on second mount i.e. when WebSocket connection is established.
     See https://elixirforum.com/t/liveview-calls-mount-two-times/30519/4
   """
-  def mount(params, session, socket) do
+  def mount(params, _session, socket) do
     case connected?(socket) do
       true ->
         Gists.increment_gist_views(params["id"])

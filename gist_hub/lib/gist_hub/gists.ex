@@ -105,6 +105,16 @@ defmodule GistHub.Gists do
   end
 
   @doc """
+  Increments the view column of a gist without changing the updated_at field.
+  See https://stackoverflow.com/a/40080478
+  """
+  def increment_gist_views(id) do
+    Gist
+    |> where(id: ^id)
+    |> Repo.update_all(inc: [views: 1])
+  end
+
+  @doc """
   Updates a gist.
 
   ## Examples

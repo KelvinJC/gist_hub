@@ -4,17 +4,31 @@ defmodule GistHubWeb.GistLive do
   alias GistHubWeb.GistFormComponent
   alias GistHubWeb.Utils.{DateFormat, FormatUsername}
 
-  def mount(%{"id" => id}, _session, socket) do
+  @doc """
+    Increment view count on second mount i.e. when WebSocket connection is established.
+    See https://elixirforum.com/t/liveview-calls-mount-two-times/30519/4
+  """
+  def mount(params, session, socket) do
+    case connected?(socket) do
+      true ->
+        Gists.increment_gist_views(params["id"])
+        {:ok, socket}
+      false ->
+        {:ok, assign(socket, page: "loading")}
+    end
+  end
+
+  def handle_params(%{"id" => id}, _uri, socket) do
     gist = Gists.get_gist!(id)
     gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
-    socket_updated =
-      socket
-      |> assign(
+    socket =
+      assign(
+        socket,
         gist: gist,
         show_form: false,
         page_title: gist.name
       )
-    {:ok, socket_updated}
+    {:noreply, socket}
   end
 
   def handle_event("delete", %{"id" => id}, socket) do

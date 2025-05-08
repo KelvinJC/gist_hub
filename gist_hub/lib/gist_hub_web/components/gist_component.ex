@@ -3,6 +3,8 @@ defmodule GistHubWeb.GistComponent do
   alias GistHubWeb.Utils.{DateFormat, FormatUsername, FormatMarkup}
 
   attr :gist_path, :string, required: true, doc: "path to gist"
+  attr :user_path, :string, required: true, doc: "path to user profile and gists"
+  attr :username, :string, required: true, doc: "unique user identifier"
 
   def gist(assigns) do
     ~H"""
@@ -16,10 +18,15 @@ defmodule GistHubWeb.GistComponent do
           >
           <div class="flex flex-col ml-4">
             <div class="text-base font-brand text-sm">
-              <span class="text-white"><%= FormatUsername.strip_name_from_email(@gist.user.email) %></span>
+              <.link
+                href={@user_path}
+                class="text-white hover:underline"
+                >
+                <%= @username %>
+              </.link>
               <span class="font-bold text-white">/</span>
               <.link
-                href= {@gist_path}
+                href={@gist_path}
                 class="text-ghLavender-dark hover:underline"
                 >
                 <%= @gist.name %>

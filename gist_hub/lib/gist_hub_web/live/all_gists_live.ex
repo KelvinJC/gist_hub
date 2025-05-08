@@ -3,6 +3,7 @@ defmodule GistHubWeb.AllGistsLive do
   alias GistHub.Gists
   alias Phoenix.LiveView.JS
   import GistHubWeb.GistComponent
+  alias GistHubWeb.Utils.FormatUsername
 
   def mount(_params, _uri, socket) do
     socket = assign(

@@ -2,7 +2,7 @@ defmodule GistHubWeb.SearchGistsLive do
   use GistHubWeb, :live_view
   import GistHubWeb.GistComponent
   alias GistHub.Gists
-  alias GistHubWeb.GistFormComponent
+  alias GistHubWeb.Utils.FormatUsername
 
   def mount(_params, _session, socket) do
     socket = assign(
@@ -81,7 +81,15 @@ defmodule GistHubWeb.SearchGistsLive do
       <%= if @gists do %>
         <div>
           <%= for {gist, index} <- Enum.with_index(@gists) do %>
-            <.gist gist_path={~p"/gist/?id=#{gist.id}"} gist={gist} index={index} current_user={@current_user} sort_by_updated_at={@sort_by_updated_at}/>
+            <.gist
+                gist_path={~p"/gist?id=#{gist.id}"}
+                user_path={~p"/#{FormatUsername.strip_name_from_email(gist.user.email)}"}
+                username={FormatUsername.strip_name_from_email(gist.user.email)}
+                gist={gist}
+                index={index}
+                current_user={@current_user}
+                sort_by_updated_at={@sort_by_updated_at}
+            />
           <% end %>
         </div>
       <% end %>

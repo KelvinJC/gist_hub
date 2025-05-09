@@ -67,12 +67,12 @@ defmodule GistHubWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [{GistHubWeb.UserAuth, :ensure_authenticated}] do
       live "/create", CreateGistLive
-      live "/gist", GistLive
       live "/all", AllGistsLive
       live "/search", SearchGistsLive
-      live "/:username", UserProfileLive, :show
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/:username", UserProfileLive, :show
+      live "/:username/:gist_id", GistLive, :show
     end
   end
 

@@ -66,6 +66,78 @@ defmodule GistHub.Gists do
     |> Repo.preload(:user)
   end
 
+  # # brittle since user could have used @rocketmail in email
+  def list_gists_by_user(username) do
+    email = "#{username}@gmail.com"
+    user =
+      User
+      |> where([u], u.email == ^email)
+      |> Repo.one()
+
+    if is_nil(user) do
+      {:error, :user_not_found}
+    else
+      gists_query =
+        from g in Gist,
+        order_by: [desc: g.updated_at] #, limit: 5
+
+      loaded_user =
+        User
+        |> Repo.get_by(email: email)
+        |> Repo.preload(gists: gists_query)
+      {:ok, loaded_user}
+    end
+  end
+
+  # NOTES for subqueries
+
+  ### without pipe operator
+  # def list_gists_by_user(username) do
+  #   email = "#{username}@gmail.com"
+
+  #   users_with_gists =
+  #     from u in User,
+  #       left_join: g in Gist,
+  #       on: u.id == g.user_id,
+  #       where: u.email == ^email
+
+  #   if Repo.exists?(users_with_gists) do
+  #     query =
+  #       from [u, g] in users_with_gists,
+  #         select: {g.name, g.description, g.markup_text, g.views, g.updated_at, u.email}
+
+  #     result =
+  #       query
+  #       |> order_by(desc: :updated_at)
+  #       |> Repo.all()
+
+  #     {:ok, result}
+  #   else
+  #     {:error, :user_not_found}
+  #   end
+  # end
+
+  ### with pipe operator
+  # def list_gists_by_user(username) do
+  #   email = "#{username}@gmail.com"
+
+  #   User
+  #   |> join(:left, [u], g in Gist, on: u.id == g.user_id)
+  #   |> where([u, _g], u.email == ^email)
+  #   |> then(fn users_with_gists ->
+  #       if Repo.exists?(users_with_gists) do
+  #         users_with_gists
+  #         |> select([u, g], {g.name, g.description, g.markup_text, g.views, g.updated_at, u.email})
+  #         |> order_by([_u, g], desc: g.updated_at)
+  #         |> Repo.all()
+  #         |> then(&{:ok, &1})
+  #       else
+  #         {:error, :user_not_found}
+  #       end
+  #   end)
+  # end
+
+
   @doc """
   Gets a single gist.
 

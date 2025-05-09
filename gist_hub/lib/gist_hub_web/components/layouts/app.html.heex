@@ -21,14 +21,22 @@
       href={~p"/all"}
       class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
       >
-      All gists
+        All gists
+      </.link>
+      <.link 
+      href={~p"/chika"}
+      class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
+      >
+        Users
       </.link>
     </div>
   </div>
   <div>
-    <div class="relative">
+    <div class="relative mr-4">
       <button class="img-down-arrow" type="button" id="user-menu-button" phx-click={GistHubWeb.Layouts.App.toggle_dropdown_menu()}>
+        <%!-- <img src="/images/profile_gist2.jpg" alt="Profile Image" class="round-image-padding w-8 h-8"> --%>
         <img src="/images/user-image.svg" alt="Profile Image" class="round-image-padding w-8 h-8">
+
       </button>
       <div 
         id="dropdown_menu"

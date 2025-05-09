@@ -67,7 +67,6 @@ defmodule GistHubWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [{GistHubWeb.UserAuth, :ensure_authenticated}] do
       live "/create", CreateGistLive
-      live "/gist", GistLive
       live "/all", AllGistsLive
       live "/search", SearchGistsLive
       live "/users/settings", UserSettingsLive, :edit
@@ -84,6 +83,18 @@ defmodule GistHubWeb.Router do
       on_mount: [{GistHubWeb.UserAuth, :mount_current_user}] do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+    end
+  end
+
+  # prevent router matching on dynamic routes that clash with specific ones
+  scope "/", GistHubWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :dynamic_routes,
+      on_mount: [{GistHubWeb.UserAuth, :ensure_authenticated}] do
+
+      live "/:username", UserProfileLive, :show
+      live "/:username/:gist_id", GistLive, :show
     end
   end
 end

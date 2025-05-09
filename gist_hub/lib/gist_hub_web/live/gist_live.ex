@@ -11,14 +11,14 @@ defmodule GistHubWeb.GistLive do
   def mount(params, _session, socket) do
     case connected?(socket) do
       true ->
-        Gists.increment_gist_views(params["id"])
+        Gists.increment_gist_views(params["gist_id"])
         {:ok, socket}
       false ->
         {:ok, assign(socket, page: "loading")}
     end
   end
 
-  def handle_params(%{"id" => id}, _uri, socket) do
+  def handle_params(%{"gist_id" => id}, _uri, socket) do
     gist = Gists.get_gist!(id)
     gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
     socket =

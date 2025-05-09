@@ -81,10 +81,11 @@ defmodule GistHubWeb.SearchGistsLive do
       <%= if @gists do %>
         <div>
           <%= for {gist, index} <- Enum.with_index(@gists) do %>
+            <% username = FormatUsername.strip_name_from_email(gist.user.email) %>
             <.gist
-                gist_path={~p"/gist?id=#{gist.id}"}
-                user_path={~p"/#{FormatUsername.strip_name_from_email(gist.user.email)}"}
-                username={FormatUsername.strip_name_from_email(gist.user.email)}
+                gist_path={~p"/#{username}/#{gist.id}"}
+                user_path={~p"/#{username}"}
+                username={username}
                 gist={gist}
                 index={index}
                 current_user={@current_user}

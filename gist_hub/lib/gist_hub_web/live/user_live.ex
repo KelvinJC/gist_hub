@@ -16,7 +16,7 @@ defmodule GistHubWeb.UserProfileLive do
   end
 
   def handle_params(%{"username" => username}, _uri, socket)
-    when username == "rqr" or not is_binary(username) or is_nil(username)
+    when username == "" or not is_binary(username) or is_nil(username)
   do
     raise InvalidUsername, "invalid username #{inspect(username)}"
   end

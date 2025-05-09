@@ -94,7 +94,7 @@ defmodule GistHubWeb.UserProfileLive do
       <div class="flex-1 min-w-0">
         <%= for {gist, index} <- Enum.with_index(@gists) do %>
           <.gist
-              gist_path={~p"/gist?id=#{gist.id}"}
+              gist_path={~p"/#{@username}/#{gist.id}"}
               user_path={~p"/#{@username}"}
               username={@username}
               gist={gist}

@@ -6,6 +6,7 @@ defmodule GistHubWeb.GistComponent do
   attr :user_path, :string, required: true, doc: "path to user profile and gists"
   attr :username, :string, required: true, doc: "unique user identifier"
 
+
   def gist(assigns) do
     ~H"""
     <div class="justify-center px-20 w-full mb-20">

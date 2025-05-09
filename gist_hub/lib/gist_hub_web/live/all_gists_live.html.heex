@@ -3,7 +3,15 @@
     <span class="flex py-2">
       <h1><span class="font-brand text-m underline text-white mr-2 hover:text-ghLavender">All gists</span></h1>
       <span class="font-brand text-m text-white mr-2">|</span>
-      <h1><span class="font-brand text-m text-ghDark-light hover:text-ghLavender">Your gists</span></h1>
+      <h1>
+        <.link
+          href={~p"/#{FormatUsername.strip_name_from_email(@current_user.email)}"}
+          class="font-brand text-m text-ghDark-light hover:text-ghLavender"
+        >
+          Your gists
+        </.link>
+      </h1>
+      
     </span>
       <div class="flex flex-col w-54">
         <div 

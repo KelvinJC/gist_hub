@@ -1,6 +1,7 @@
 defmodule GistHubWeb.GistFormComponent do
   use GistHubWeb, :live_component
   alias GistHub.{Gists, Gists.Gist}
+  alias GistHubWeb.Utils.FormatUsername
 
   def mount(socket) do
     {:ok, socket}
@@ -85,7 +86,8 @@ defmodule GistHubWeb.GistFormComponent do
         socket = push_event(socket, "clear-textarea", %{})
         changeset = Gists.change_gist(%Gist{})
         socket = assign(socket, :form, to_form(changeset))
-        {:noreply, push_navigate(socket, to: ~p"/gist?#{[id: gist]}")}
+        username = FormatUsername.strip_name_from_email(socket.assigns.current_user.email)
+        {:noreply, push_navigate(socket, to: ~p"/#{username}/#{gist.id}")}
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :form, to_form(changeset))}
     end
@@ -95,7 +97,8 @@ defmodule GistHubWeb.GistFormComponent do
     params = Map.put(params, "id", socket.assigns.id)
     case Gists.update_gist(socket.assigns.current_user, params) do
       {:ok, gist} ->
-        {:noreply, push_navigate(socket, to: ~p"/gist?#{[id: gist]}")}
+        username = FormatUsername.strip_name_from_email(socket.assigns.current_user.email)
+        {:noreply, push_navigate(socket, to: ~p"/#{username}/#{gist.id}")}
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :form, to_form(changeset))}
       {:error, :unauthorised} ->

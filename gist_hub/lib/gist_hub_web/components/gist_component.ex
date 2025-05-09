@@ -12,7 +12,7 @@ defmodule GistHubWeb.GistComponent do
       <div class="flex justify-between mb-2">
         <div class="flex items-center">
           <img
-            src="/images/user-image.svg"
+            src="/images/profile_gist2.jpg"
             alt="Profile Image"
             class="rounded-full w-6 h-6"
           >

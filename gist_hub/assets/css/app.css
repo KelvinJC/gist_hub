@@ -41,8 +41,8 @@
 
 .round-image-padding {
     border-radius: 50%;
-    border: 1.5px solid #ffffff;
-    padding: 4px;
+    border: 0.5px solid #ffffff;
+    padding: 1px;
 }
 
 .img-down-arrow::after {

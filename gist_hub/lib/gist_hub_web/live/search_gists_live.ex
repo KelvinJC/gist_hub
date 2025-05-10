@@ -78,7 +78,6 @@ defmodule GistHubWeb.SearchGistsLive do
           </.form>
         </div>
       </div>
-      <%= if @gists do %>
         <div>
           <%= for {gist, index} <- Enum.with_index(@gists) do %>
             <% username = FormatUsername.strip_name_from_email(gist.user.email) %>
@@ -93,7 +92,11 @@ defmodule GistHubWeb.SearchGistsLive do
             />
           <% end %>
         </div>
-      <% end %>
+        <%= if @gists == [] and @search_term != "" do %>
+          <div class="flex justify-center mb-40">
+            <p class=" font-brand font-regular text-ghDark-light text-xl">No results found for `{@search_term}`</p>
+          </div>
+        <% end %>
     """
   end
 end

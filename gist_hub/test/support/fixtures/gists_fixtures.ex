@@ -7,17 +7,20 @@ defmodule GistHub.GistsFixtures do
   @doc """
   Generate a gist.
   """
-  def gist_fixture(attrs \\ %{}) do
-    {:ok, gist} =
-      attrs
-      |> Enum.into(%{
-        description: "some description",
-        markup_text: "some markup_text",
-        name: "some name"
-      })
-      |> GistHub.Gists.create_gist()
 
-    gist
+  import GistHub.AccountsFixtures
+  alias GistHub.Repo
+
+  def gist_fixture(gist_author \\ %{}, attrs \\ %{}) do
+    user = gist_author == %{} && user_fixture() || gist_author
+    attrs = Enum.into(attrs, %{
+      description: "some description",
+      markup_text: "some markup_text",
+      name: "some name",
+      user_id: user.id
+      })
+    {:ok, gist} = GistHub.Gists.create_gist(user, attrs)
+    Repo.preload(gist, :user)
   end
 
   @doc """

@@ -7,6 +7,7 @@ defmodule GistHub.GistsTest do
     alias GistHub.Gists.Gist
 
     import GistHub.GistsFixtures
+    import GistHub.AccountsFixtures
 
     @invalid_attrs %{name: nil, description: nil, markup_text: nil}
 
@@ -21,38 +22,65 @@ defmodule GistHub.GistsTest do
     end
 
     test "create_gist/1 with valid data creates a gist" do
+      user = user_fixture()
       valid_attrs = %{name: "some name", description: "some description", markup_text: "some markup_text"}
 
-      assert {:ok, %Gist{} = gist} = Gists.create_gist(valid_attrs)
+      assert {:ok, %Gist{} = gist} = Gists.create_gist(user, valid_attrs)
       assert gist.name == "some name"
       assert gist.description == "some description"
       assert gist.markup_text == "some markup_text"
     end
 
     test "create_gist/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Gists.create_gist(@invalid_attrs)
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Gists.create_gist(user, @invalid_attrs)
+    end
+
+    test "update_gist/2 with user who is not gist author returns unauthorised error" do
+      user = user_fixture()
+      gist = gist_fixture()
+      update_attrs = %{"id" => gist.id, "name" => "some updated name", "description" => "some updated description", "markup_text" => "some updated markup_text"}
+
+      assert {:error, :unauthorised} = Gists.update_gist(user, update_attrs)
+      assert gist == Gists.get_gist!(gist.id)
     end
 
     test "update_gist/2 with valid data updates the gist" do
-      gist = gist_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", markup_text: "some updated markup_text"}
+      user = user_fixture()
+      gist = gist_fixture(user)
+      update_attrs = %{"id" => gist.id, "name" => "some updated name", "description" => "some updated description", "markup_text" => "some updated markup_text"}
 
-      assert {:ok, %Gist{} = gist} = Gists.update_gist(gist, update_attrs)
+      assert {:ok, %Gist{} = gist} = Gists.update_gist(user, update_attrs)
       assert gist.name == "some updated name"
       assert gist.description == "some updated description"
       assert gist.markup_text == "some updated markup_text"
     end
 
     test "update_gist/2 with invalid data returns error changeset" do
-      gist = gist_fixture()
-      assert {:error, %Ecto.Changeset{}} = Gists.update_gist(gist, @invalid_attrs)
+      user = user_fixture()
+      gist = gist_fixture(user)
+      invalid_attrs = %{
+        "id" => gist.id,
+        "name" => "",  # Empty string violates a required validation
+        "markup_text" => nil,
+        "views" => -5
+      }
+      assert {:error, %Ecto.Changeset{}} = Gists.update_gist(user, invalid_attrs)
       assert gist == Gists.get_gist!(gist.id)
     end
 
-    test "delete_gist/1 deletes the gist" do
-      gist = gist_fixture()
-      assert {:ok, %Gist{}} = Gists.delete_gist(gist)
+    test "delete_gist/1 with gist author deletes the gist" do
+      user = user_fixture()
+      gist = gist_fixture(user)
+      assert {:ok, %Gist{}} = Gists.delete_gist(user, gist.id)
       assert_raise Ecto.NoResultsError, fn -> Gists.get_gist!(gist.id) end
+    end
+
+    test "delete_gist/1 without gist author returns unauthorised error" do
+      user = user_fixture()
+      gist = gist_fixture()
+      assert {:error, :unauthorised} = Gists.delete_gist(user, gist.id)
+      assert gist == Gists.get_gist!(gist.id)
     end
 
     test "change_gist/1 returns a gist changeset" do

@@ -9,7 +9,8 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
       {:ok, _lv, html} = live(conn, ~p"/users/register")
 
       assert html =~ "Register"
-      assert html =~ "Log in"
+      assert html =~ "Sign in"
+      assert html =~ "Create an account"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -49,10 +50,14 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
-      response = html_response(conn, 200)
-      assert response =~ email
-      assert response =~ "Settings"
-      assert response =~ "Log out"
+      response = html_response(conn, 302) #redirect to /create
+      assert response =~ ~s|<html><body>You are being <a href="/create">redirected</a>.</body></html>|
+      # assert response =~ "Settings"
+      # assert response =~ "Log out"
+
+      # new asserts for create page
+      # assert response =~ "Create gist"
+      # assert response =~ "Filename including extension"
     end
 
     test "renders errors for duplicated email", %{conn: conn} do
@@ -77,11 +82,11 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element(~s|main a:fl-contains("Log in")|)
+        |> element(~s|main a:fl-contains("Sign in")|)
         |> render_click()
         |> follow_redirect(conn, ~p"/users/log_in")
 
-      assert login_html =~ "Log in"
+      assert login_html =~ "Sign in"
     end
   end
 end

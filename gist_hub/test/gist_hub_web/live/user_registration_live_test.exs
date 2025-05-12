@@ -29,11 +29,12 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
       result =
         lv
         |> element("#registration_form")
-        |> render_change(user: %{"email" => "with spaces", "password" => "too short"})
+        |> render_change(user: %{"email" => "with spaces", "password" => "too short", "password_confirmation:" => "password"})
 
       assert result =~ "Register"
       assert result =~ "must have the @ sign and no spaces"
       assert result =~ "should be at least 12 character"
+      assert result =~ "does not match password"
     end
   end
 
@@ -42,7 +43,10 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
       {:ok, lv, _html} = live(conn, ~p"/users/register")
 
       email = unique_user_email()
-      form = form(lv, "#registration_form", user: valid_user_attributes(email: email))
+      password = valid_user_password()
+      form =
+        form(lv, "#registration_form", user: %{"email" => email, "password" => password, "password_confirmation" => password})
+
       render_submit(form)
       conn = follow_trigger_action(form, conn)
 
@@ -68,7 +72,7 @@ defmodule GistHubWeb.UserRegistrationLiveTest do
       result =
         lv
         |> form("#registration_form",
-          user: %{"email" => user.email, "password" => "valid_password"}
+          user: %{"email" => user.email, "password" => "valid_password", "password_confirmation" => "valid_password"}
         )
         |> render_submit()
 

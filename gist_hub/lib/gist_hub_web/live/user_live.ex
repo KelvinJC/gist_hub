@@ -43,10 +43,15 @@ defmodule GistHubWeb.UserProfileLive do
     <div class="gh-gradient flex items-center">
       <div class="ml-10">
         <img
+        src="/images/beach.png"
+        alt="Profile Image"
+          class="rounded-full w-40 h-40"
+        >
+        <!-- <img
           src="/images/profile_gist2.jpg"
           alt="Profile Image"
           class="rounded-full w-40 h-40"
-        >
+        > -->
       </div>
     </div>
     <div class="ml-8 flex w-full">
@@ -102,6 +107,19 @@ defmodule GistHubWeb.UserProfileLive do
               current_user={@current_user}
               sort_by_updated_at={@sort_by_updated_at}
           />
+        <% end %>
+        <%= if @gists == [] do %>
+          <div class=" flex justify-center ">
+            <%= if @email == @current_user.email do %>
+            <p class=" font-brand font-regular text-ghDark-light text-xl">
+              You have no gists yet. Click
+              <.link class="text-ghLavender hover:underline" href={~p"/create"}>here.</.link>
+              to create a gist
+            </p>
+            <%= else %>
+            <p class=" font-brand font-regular text-ghDark-light text-xl">{@username} doesn't have any gists yet.</p>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

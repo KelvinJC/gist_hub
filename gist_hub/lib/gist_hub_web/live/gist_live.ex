@@ -3,32 +3,42 @@ defmodule GistHubWeb.GistLive do
   alias GistHub.Gists
   alias GistHubWeb.GistFormComponent
   alias GistHubWeb.Utils.{DateFormat, FormatUsername}
+  alias GistHubWeb.GistNotFound
 
   @doc """
     Increment view count on second mount i.e. when WebSocket connection is established.
     See https://elixirforum.com/t/liveview-calls-mount-two-times/30519/4
   """
   def mount(params, _session, socket) do
-    case connected?(socket) do
-      true ->
-        Gists.increment_gist_views(params["gist_id"])
-        {:ok, socket}
+    with true <- connected?(socket),
+        id = params["gist_id"],
+        {:ok, valid_uuid} <- Ecto.UUID.cast(id) do
+      Gists.increment_gist_views(id)
+      {:ok, socket}
+    else
       false ->
         {:ok, assign(socket, page: "loading")}
+      :error ->
+        raise GistNotFound, "unknown gist #{inspect(params["gist_id"])}"
     end
   end
 
   def handle_params(%{"gist_id" => id}, _uri, socket) do
-    gist = Gists.get_gist!(id)
-    gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
-    socket =
-      assign(
-        socket,
-        gist: gist,
-        show_form: false,
-        page_title: gist.name
-      )
-    {:noreply, socket}
+    case Ecto.UUID.cast(id) do
+      {:ok, valid_uuid} ->
+        gist = Gists.get_gist!(id)
+        gist = Map.put(gist, :relative, DateFormat.get_relative_time(gist.updated_at))
+        socket =
+          assign(
+            socket,
+            gist: gist,
+            show_form: false,
+            page_title: gist.name
+          )
+        {:noreply, socket}
+      :error ->
+        raise GistNotFound, "unknown gist #{inspect(id)}"
+    end
   end
 
   def handle_event("delete", %{"id" => id}, socket) do
@@ -51,4 +61,9 @@ defmodule GistHubWeb.GistLive do
     socket = assign(socket, :show_form, true)
     {:noreply, socket}
   end
+end
+
+defmodule GistHubWeb.GistNotFound do
+  @moduledoc false
+  defexception [:message, plug_status: 404]
 end

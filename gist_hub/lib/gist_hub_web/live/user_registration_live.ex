@@ -125,7 +125,7 @@ defmodule GistHubWeb.UserRegistrationLive do
         pwd_field: "",
         show_pwd_confirm_field: false,
         pwd_confirm_field_has_text: false,
-        pwd_confirm_field: "",
+        pwd_confirm_field: ""
       )
       |> assign_form(changeset)
 
@@ -156,7 +156,7 @@ defmodule GistHubWeb.UserRegistrationLive do
       pwd_field: user_params["password"],
       pwd_field_has_text: String.length(user_params["password"] ) > 0,
       pwd_confirm_field: user_params["password_confirmation"],
-      pwd_confirm_field_has_text: String.length(user_params["password_confirmation"] ) > 0,
+      pwd_confirm_field_has_text: String.length(user_params["password_confirmation"] ) > 0
     )
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
   end

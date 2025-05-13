@@ -195,6 +195,18 @@ Hooks.TogglePasswordVisibility = {
   }
 }
 
+Hooks.TruncateEmailUsername = {
+  mounted() {
+    const userEmail = document.getElementById("user-email");
+    if (!userEmail) return;
+
+    const [username] = userEmail.textContent.split("@");
+    const truncated = username.length > 11 ? `${username.slice(0, 11)}...` : username;
+
+    userEmail.textContent = truncated;
+  }
+}
+
 
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,

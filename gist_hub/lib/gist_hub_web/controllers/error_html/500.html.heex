@@ -3,28 +3,87 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Error · GistHub</title>
+    <title>500 Error · GistHub</title>
     <link rel="stylesheet" href="/assets/app.css"/>
     <script defer type="text/javascript" src="/assets/app.js"></script>
   </head>
-  <body>
-    <header>
-      <section class="container w-24 h-24 mt-4 ml-4">
-        <%!-- <nav>
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-          </ul>
-        </nav> --%>
-        <a href="https://phoenixframework.org/" class="phx-logo flex">
-          <img src="/images/gist-logo.svg" alt="Logo" class="h-20 w-auto">
-          <img src="/images/logo.svg" alt="Phoenix Framework Logo"/>
+  <body class="bg-ghDark-dark">
+    <header class="flex justify-between items-center space-x-2 py-2 bg-ghDark">
+      <div class="flex relative items-center">
+        <a href={~p"/"} class="py-2 ml-2">
+          <img src="/images/gist-logo.svg" alt="Logo" class="h-8 w-auto">
         </a>
-      </section>
+        <a href={~p"/"} class="mr-4 ml">
+          <div class="text-white font-brand font-bold text-3xl">GistHub</div>
+        </a>
+        <div class="flex py-2 items-center">
+          <!-- search bar -->
+          <!---->
+          <.link 
+          href={~p"/all"}
+          class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
+          >
+            All gists
+          </.link>
+          <.link 
+          href={~p"/chika"}
+          class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
+          >
+            :chika
+          </.link>
+        </div>
+      </div>
+      <div>
+        <div class="relative mr-4">
+          <button 
+            class="img-down-arrow" 
+            type="button" 
+            id="user-menu-button" 
+            phx-click={GistHubWeb.Layouts.App.toggle_dropdown_menu()}>
+            <img src="/images/profile_gist2.jpg" alt="Profile Image" class="round-image-padding w-8 h-8">
+            <%!-- <img src="/images/user-image.svg" alt="Profile Image" class="round-image-padding w-8 h-8"> --%>
+          </button>
+          <div 
+            id="dropdown_menu"
+            phx-click-away={GistHubWeb.Layouts.App.toggle_dropdown_menu()}
+            class="dropdown-menu-arrow absolute right-0 mt-2 py-2 w-56 bg-ghDark rounded-lg shadow-xl border border-white"
+            hidden="true"
+          >
+          </div>
+        </div>
+      </div>
     </header>
-    <main class="container">
-      <section class="phx-hero">
-        <p class="ml-4">Sorry, An error has occurred.</p>
+    <main>
+      <div class="gh-gradient">
+      </div>
+        <section class="phx-hero">
+        <div class="mb-20">
+          <div class="flex justify-center items-center space-x-4">
+            <a href="/" class="phx-logo w-40 h-40">
+              <img class="text-white" src="/images/Chika_rocket_launch.svg" alt="Rocket launch icon">
+            </a>
+            <div class="mt-8">
+              <p class="font-brand font-regular text-ghDark-light text-3xl">Oops! It's a code 500.</p>
+              <p class="font-brand font-regular text-ghDark-light text-3xl">Let's retry our launch off, shall we?</p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
+    <footer class="h-[120px] w-full flex justify-center text-white px-16 py-20 font-brand font-regular text-xs">
+      <div class="w-full px-10">
+        <div class="border-t-[1px] border-white"></div>
+        <div class="flex items-center space-x-2 py-6">
+          <img src="/images/em-logo.svg" alt="Gisthub Logo" class="h-8 w-8"/>
+          <p>© 2025 Kaizen Software LLC</p>
+          <div class="text-ghLavender-dark px-8 space-x-4">
+            <a href={~p"/"} class="hover:underline">Terms</a>
+            <a href={~p"/"} class="hover:underline">Privacy</a>
+            <a href={~p"/"} class="hover:underline">About</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
   </body>
 </html>

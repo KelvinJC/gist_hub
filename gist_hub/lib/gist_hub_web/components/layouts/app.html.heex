@@ -17,38 +17,40 @@
         />
       <% end %>
       <!---->
-      <.link 
+      <.link
       href={~p"/all"}
       class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
       >
         All gists
       </.link>
-      <.link 
-      href={~p"/chika"}
-      class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
-      >
-        :chika
-      </.link>
     </div>
   </div>
-  <div>
+  <div class="flex justify-center items-center">
+    <div class="mr-4">
+      <.link
+      href={~p"/#{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}"}
+      class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
+      >
+        :{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}
+      </.link>
+    </div>
     <div class="relative mr-4">
-      <button 
-        class="img-down-arrow" 
-        type="button" 
-        id="user-menu-button" 
+      <button
+        class="img-down-arrow"
+        type="button"
+        id="user-menu-button"
         phx-click={GistHubWeb.Layouts.App.toggle_dropdown_menu()}>
         <img src="/images/profile_gist2.jpg" alt="Profile Image" class="round-image-padding w-8 h-8">
         <%!-- <img src="/images/user-image.svg" alt="Profile Image" class="round-image-padding w-8 h-8"> --%>
       </button>
-      <div 
+      <div
         id="dropdown_menu"
         phx-click-away={GistHubWeb.Layouts.App.toggle_dropdown_menu()}
         class="dropdown-menu-arrow absolute right-0 mt-2 py-2 w-56 bg-ghDark rounded-lg shadow-xl border border-white"
         hidden="true"
       >
-        <%= if @current_user do %>  
-          <.link 
+        <%= if @current_user do %>
+          <.link
             href={~p"/users/settings"}
             class="menu-item border-b border-white border-opacity-50"
             role="menuitem"
@@ -59,8 +61,8 @@
           >
             Signed in as <span id="user-email" title={@current_user.email}><%= @current_user.email %></span>
           </.link>
-          <.link 
-            href=""
+          <.link
+            href={~p"/#{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}"}
             class="menu-item"
             role="menuitem"
             tabindex="-1"
@@ -69,8 +71,8 @@
           >
           Your gists
           </.link>
-          <.link 
-            href=""
+          <.link
+            href={~p"/#{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}"}
             class="menu-item  border-b border-white border-opacity-50"
             role="menuitem"
             tabindex="-1"
@@ -79,7 +81,7 @@
           >
           Saved gists
           </.link>
-          <.link 
+          <.link
             href={~p"/users/log_out"}
             class="menu-item"
             role="menuitem"
@@ -89,8 +91,8 @@
           >
           Sign out
           </.link>
-        <% else %> 
-          <.link 
+        <% else %>
+          <.link
             href={~p"/users/log_in"}
             class="menu-item border-b border-white border-opacity-50"
             role="menuitem"
@@ -100,7 +102,7 @@
           >
           Sign in
           </.link>
-          <.link 
+          <.link
             href={~p"/users/register"}
             class="menu-item"
             role="menuitem"
@@ -110,7 +112,7 @@
           >
           Register
           </.link>
-        <% end %> 
+        <% end %>
       </div>
 
     </div>

@@ -8,4 +8,10 @@ defmodule GistHubWeb.Layouts.App do
       out: {"transition ease-in duration-75", "transform opacity-100 translate-y-0", "transform opacity-0 translate-y-[-10%]"}
       )
   end
+
+  def get_username_from_email(email) do
+    email
+    |> String.split("@")
+    |> hd()
+  end
 end

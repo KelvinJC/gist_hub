@@ -29,9 +29,9 @@
     <div class="mr-4">
       <.link
       href={~p"/#{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}"}
-      class="ml-2 text-white text-[1rem] font-brand font-bold hover:text-ghDark-light"
+      class="ml-2 text-ghDark-light text-[1rem] font-brand font-bold hover:underline"
       >
-        :{assigns[:current_user] && GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}
+        {assigns[:current_user] && ":" <> GistHubWeb.Layouts.App.get_username_from_email(@current_user.email) || ""}
       </.link>
     </div>
     <div class="relative mr-4">

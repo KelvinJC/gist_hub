@@ -42,11 +42,21 @@ defmodule GistHubWeb.UserProfileLive do
     ~H"""
     <div class="gh-gradient flex items-center">
       <div class="ml-10">
-        <img
-        src="/images/beach.png"
+        <%!-- <img
+        src="/images/profile_gist2.png"
         alt="Profile Image"
-          class="rounded-full w-40 h-40"
-        >
+        class="rounded-full w-44 h-40"
+        > --%>
+        <%!-- <img
+        src="/images/rocket_launch.svg"
+        alt="Profile Image"
+        class="rounded-full w-44 h-40"
+        > --%>
+        <div class="relative flex justify-center items-center circle">
+          <span class="absolute top-2 mb-4 text-9xl font-regular text-ghDark-light">{String.at(@username, 0)}</span>
+          <%!-- <span class="absolute top-2 mb-4 text-9xl font-regular text-ghDark-light">{String.at(@username, 0)}</span> --%>
+          <%!-- <span class="absolute top-2 mb-4 text-9xl font-regular text-ghDark-light">5</span> --%>
+        </div>
         <!-- <img
           src="/images/profile_gist2.jpg"
           alt="Profile Image"
@@ -58,8 +68,9 @@ defmodule GistHubWeb.UserProfileLive do
       <div>
         <div class="max-w-sm space-y-8">
           <div class="flex-col justify-center items-center font-brand">
-            <p class="text-white text-3xl font-regular">Chika Ijeoma</p>
-            <p class="text-ghDark-light text-xl">{@username}</p>
+            <p class="text-white text-3xl font-regular">{String.capitalize(@username)}</p>
+            <%!-- <p class="text-white text-3xl font-regular">Winston Johnson-Chu</p> --%>
+            <%!-- <p class="text-ghDark-light text-xl">{@username}</p> --%>
           </div>
           <div class="font-brand font-regular text-sm space-y-4 text-ghDark-light">
             <span class="flex items-center space-x-2">

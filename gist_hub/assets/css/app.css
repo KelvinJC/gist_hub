@@ -173,3 +173,11 @@ pre code {
 .toggle-pwd-btn:focus {
     @apply focus:outline-none focus:border-transparent focus:ring-0
 }
+
+.circle {
+    @apply border-4 border-ghDark-light;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    /* width and height can be anything, as long as they're equal */
+}

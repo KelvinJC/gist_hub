@@ -47,11 +47,6 @@ defmodule GistHubWeb.UserProfileLive do
         alt="Profile Image"
         class="rounded-full w-44 h-40"
         > --%>
-        <%!-- <img
-        src="/images/rocket_launch.svg"
-        alt="Profile Image"
-        class="rounded-full w-44 h-40"
-        > --%>
         <div class="relative flex justify-center items-center circle">
           <span class="absolute top-2 mb-4 text-9xl font-regular text-ghDark-light">{String.at(@username, 0)}</span>
           <%!-- <span class="absolute top-2 mb-4 text-9xl font-regular text-ghDark-light">{String.at(@username, 0)}</span> --%>

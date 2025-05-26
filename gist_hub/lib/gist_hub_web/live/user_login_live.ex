@@ -84,7 +84,6 @@ defmodule GistHubWeb.UserLoginLive do
         </.form>
       </div>
     </div>
-
     """
   end
 end

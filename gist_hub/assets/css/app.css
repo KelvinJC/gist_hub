@@ -20,9 +20,8 @@
     background-image: linear-gradient(to bottom, #631A61, #551653, #340E33, #010101);
     /* background-image: transparent; */
     height: 225px;
-    z-index: 1;
     position: sticky;
-    top: 60px;
+    top: 64px;
 }
 /* 
 body {

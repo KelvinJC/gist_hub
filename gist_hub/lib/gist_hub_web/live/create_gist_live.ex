@@ -9,17 +9,21 @@ defmodule GistHubWeb.CreateGistLive do
 
   def render(assigns) do
     ~H"""
-      <div class="gh-gradient flex items-center justify-center">
-        <h1 class="font-brand text-white text-xl">
-            Instantly share code, notes and snippets.
-        </h1>
+      <div class="gradientBg">
+        <div class="flex items-center justify-center">
+          <div class="mt-20 mb-10">
+            <h1 class="font-brand text-white text-xl">
+              Instantly share code, notes and snippets.
+            </h1>
+          </div>
+        </div>
+        <.live_component
+          module={GistFormComponent}
+          form={to_form(Gists.change_gist(%Gist{}))}
+          id={:new}
+          current_user={@current_user}
+        />
       </div>
-      <.live_component
-        module={GistFormComponent}
-        form={to_form(Gists.change_gist(%Gist{}))}
-        id={:new}
-        current_user={@current_user}
-      />
     """
   end
 end

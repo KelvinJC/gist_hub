@@ -18,21 +18,18 @@
 
 .gh-gradient {
     background-image: linear-gradient(to bottom, #631A61, #551653, #340E33, #010101);
-    /* background-image: transparent; */
     height: 225px;
     position: sticky;
     top: 64px;
 }
-/* 
-body {
-  height: 100vh;
+
+.gradientBg {
   margin: 0;
-  background-image: linear-gradient(to bottom, #631A61 70px, #010101 40%);
+  background-image: linear-gradient(to bottom, #631A61, 1%, #551653, 20%, #340E33 30%, #010101 50%);
   background-repeat: no-repeat;
   background-color: #010101;
-  min-height: 100vh;
-  margin: 0; 
-} */
+  min-height: auto;
+}
 
 .dropdown-menu-arrow::before {
   content: "";

@@ -219,6 +219,12 @@ topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
+// make flash message disappear after 5 seconds
+window.addEventListener("gisthub:auto-clear", (e) => {
+  let el = e.target;
+  setTimeout(() => liveSocket.execJS(el, el.getAttribute(e.detail.attr)), e.detail.timeout);
+})
+
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 

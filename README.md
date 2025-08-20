@@ -1,4 +1,4 @@
-# Gist
+# GistHub
 
 To start your Phoenix server:
 
